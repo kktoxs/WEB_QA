@@ -9,6 +9,7 @@ class AuthPage(BasePage):
 
     def __init__(self, driver):
         super().__init__(driver, self.url)
+        super(AuthPage, self).open()  # страницы авторизации автоматически открываются при создании
 
     def sign_in_with_mail(self, email, password):
         self.element(Locators.TOP_CORNER_SIGN_IN_BUTTON).click()
