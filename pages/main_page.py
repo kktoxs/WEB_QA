@@ -13,3 +13,7 @@ class MainPage(BasePage):
 
     def search(self, text):
         self.element(Locators.SEARCH).send_keys(text + '\n')
+
+    def open_profile(self, login):
+        self.search(login)
+        self.element()

@@ -7,4 +7,4 @@ class ProfilePageLocators:
     SHOW_COLLECTIONS = (By.CSS_SELECTOR, 'a[data-qa="show-all-collections"]')
     SHOW_OBJECTS = (By.CSS_SELECTOR, 'a[data-qa="show-all-objects"]')
     SHOW_ON_MAP = (By.CSS_SELECTOR, 'a[data-qa="show-map-button"]')
-    
+    SHOW_ON_MAP_COUNTER = (By.CLASS_NAME, 'map-button__counter')

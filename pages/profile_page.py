@@ -19,3 +19,6 @@ class ProfilePage(BasePage):
 
     def show_on_map(self):
         self.element(Locators.SHOW_ON_MAP).click()
+
+    def get_show_on_map_counter(self):
+        return self.element(Locators.SHOW_ON_MAP_COUNTER).text
