@@ -12,7 +12,7 @@ class TestAuthPage:
     def test_sign_in(self, driver):
         profile_page = ProfilePage(driver)
         auth_page = AuthPage(driver)
-        auth_page.sign_in_with_mail('ktox', '123456789')
+        auth_page.sign_in_with_mail('ktox', '123123123')
         auth_page.submit()
         assert profile_page.get_login() == 'ktox', 'Неправильный логин'
 

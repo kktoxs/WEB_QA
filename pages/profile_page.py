@@ -22,3 +22,6 @@ class ProfilePage(BasePage):
 
     def get_show_on_map_counter(self):
         return self.element(Locators.SHOW_ON_MAP_COUNTER).text
+
+    def open_personal(self):
+        self.element(Locators.PRIVATE).click()
