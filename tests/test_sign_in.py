@@ -13,19 +13,19 @@ class TestAuthPage:
         profile_page = ProfilePage(driver)
         auth_page = AuthPage(driver)
         auth_page.sign_in_with_mail('ktox', '123123123')
-        auth_page.submit()
+        # auth_page.submit()
         assert profile_page.get_login() == 'ktox', 'Неправильный логин'
 
     def test_sign_in_wrong_password(self, driver):
         auth_page = AuthPage(driver)
         auth_page.sign_in_with_mail('ktox', 'wrongpasswd')
-        auth_page.submit()
+        # auth_page.submit()
         assert auth_page.get_error_message() == self.wrong_password_error
 
     def test_sign_in_no_such_user(self, driver):
         auth_page = AuthPage(driver)
         auth_page.sign_in_with_mail('nosuchuser', 'anypasswd')
-        auth_page.submit()
+        # auth_page.submit()
         assert auth_page.get_error_message() == self.no_such_user_error
 
     def test_reset_password(self, driver):

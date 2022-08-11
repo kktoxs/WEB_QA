@@ -17,10 +17,10 @@ class AuthPage(BasePage):
         self.element(Locators.EMAIL_SWITCH).click()
         self.element(Locators.LOGIN_INPUT).send_keys(email)
         self.element(Locators.PASSWORD_INPUT).send_keys(password)
-        # self.element(Locators.CONTINUE_BUTTON).click()
-
-    def submit(self):
         self.element(Locators.CONTINUE_BUTTON).click()
+
+    # def submit(self):
+    #     self.element(Locators.CONTINUE_BUTTON).click()
 
     def get_error_message(self):
         return self.element(Locators.ERROR_MESSAGE).text

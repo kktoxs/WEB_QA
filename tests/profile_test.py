@@ -17,7 +17,7 @@ class TestProfilePage:
         show_on_map_text = profile_page.get_show_on_map_counter()
         assert show_on_map_text != '0 мест'
         auth_page.sign_in_with_mail('ktox', '123123123')
-        auth_page.submit()
+        # cauth_page.submit()
         main_page.open_my_profile()
         # после авторизации
         show_on_map_text_authorized = profile_page.get_show_on_map_counter()
@@ -30,7 +30,7 @@ class TestProfilePage:
         auth_page = AuthPage(driver)
 
         auth_page.sign_in_with_mail('ktox', '123123123')
-        auth_page.submit()
+        # auth_page.submit()
         main_page.open_my_profile()
         profile_page.open_personal()
         # до обновления страницы
