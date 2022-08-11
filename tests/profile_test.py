@@ -17,7 +17,7 @@ class TestProfilePage:
         show_on_map_text = profile_page.get_show_on_map_counter()
         assert show_on_map_text != '0 мест'
         auth_page.sign_in_with_mail('ktox', '123123123')
-        # cauth_page.submit()
+        # auth_page.submit()
         main_page.open_my_profile()
         # после авторизации
         show_on_map_text_authorized = profile_page.get_show_on_map_counter()
