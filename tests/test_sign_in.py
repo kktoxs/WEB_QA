@@ -14,7 +14,7 @@ class TestAuthPage:
         auth_page = AuthPage(driver)
         auth_page.sign_in_with_mail('ktox', '123123123')
         # auth_page.submit()
-        assert profile_page.get_login() == 'ktox', 'Неправильный логин'
+        assert profile_page.get_login() == 'ktox', 'Неправильный логин в профиле'
 
     def test_sign_in_wrong_password(self, driver):
         auth_page = AuthPage(driver)

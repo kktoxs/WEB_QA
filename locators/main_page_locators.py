@@ -5,13 +5,10 @@ class MainPageLocators:
     LOGO = (By.CSS_SELECTOR, 'svg[data-qa="navbar-logo-desktop"]')
     SEARCH = (By.CSS_SELECTOR, 'input[data-qa="navbar-search-input"]')
 
-    # def SEARCH_RESULT_PROFILE(self, search_text):
-    #     return (By.XPATH, '//p[text()={search_text}]') TODO
-
     #  FEED
     CREATE = (By.CSS_SELECTOR, 'svg[data-qa="select-creation-item"]')
-    USER_MENU = (By.CSS_SELECTOR, 'div[data-qa="user-menu-button"]')
 
+    USER_MENU = (By.CSS_SELECTOR, 'div[data-qa="user-menu-button"]')
     PROFILE = (By.CSS_SELECTOR, 'a[data-qa="link-user"]')
     SETTINGS = (By.CSS_SELECTOR, 'svg[data-qa="navbar-settings-button"]')
     SIGN_OUT = (By.CSS_SELECTOR, 'div[data-qa="link-sign-out"]')

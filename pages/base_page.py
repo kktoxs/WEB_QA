@@ -6,7 +6,6 @@ class BasePage:
     def __init__(self, driver, url):
         self.driver = driver
         self.url = url
-        # self.driver.get(self.url)
 
     def open(self):
         self.driver.get(self.url)
@@ -17,5 +16,5 @@ class BasePage:
     def elements(self, locator, timeout=5):
         return Wait(self.driver, timeout).until(EC.visibility_of_all_elements_located(locator))
 
-    def remove_footer(self):
-        self.driver.execute_script("window.scrollTo(0, 500)")
+    def scroll_down(self):
+        self.driver.execute_script("window.scrollTo(0, 1000)")
