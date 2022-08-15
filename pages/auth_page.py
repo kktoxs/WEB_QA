@@ -31,3 +31,6 @@ class AuthPage(BasePage):
         self.element(Locators.EMAIL_SWITCH).click()
         self.element(Locators.RESET_EMAIL_INPUT).send_keys(email)
         #  self.element(Locators.RESET_PASSWORD_SEND_CODE_BUTTON).click()  жду пока исправят задвоение блока
+
+    def get_reset_error_message(self):
+        return self.element(Locators.RESET_PASSWORD_ERROR_MESSAGE).text

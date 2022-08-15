@@ -14,7 +14,7 @@ class MainPageLocators:
     SIGN_OUT = (By.CSS_SELECTOR, 'div[data-qa="link-sign-out"]')
     CLOSE_USER_MENU = (By.CSS_SELECTOR, 'svg[data-qa="navbar-log-out-button"]')
 
-    #  LANGUAGE = (By.CSS_SELECTOR, 'button[data-qa="lang-button"]')
+    LANGUAGE = (By.CLASS_NAME, 'button[data-qa="lang-button"]')
     GOOGLE_PLAY = (By.CSS_SELECTOR, 'svg[data-qa="navbar-google-play-icon"]')
 
     COLLECTION = (By.CSS_SELECTOR, 'div[data-qa="preview-collections"]')

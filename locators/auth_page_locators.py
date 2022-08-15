@@ -13,6 +13,7 @@ class AuthPageLocators:
     SHOW_PASSWORD_BUTTON = (By.CSS_SELECTOR, 'div[data-qa="show-password-button"]')
     RESET_PASSWORD_BUTTON = (By.CSS_SELECTOR, 'span[data-qa="reset-password-button"]')
     RESET_PASSWORD_SEND_CODE_BUTTON = (By.CSS_SELECTOR, 'button[data-qa="reset-password-button"]')
+    RESET_PASSWORD_ERROR_MESSAGE = (By.CLASS_NAME, 'form-credentials-error')
     RESET_EMAIL_INPUT = (By.CSS_SELECTOR, 'input[data-qa="reset-password-email-input"]')
     GOOGLE_BUTTON = (By.CLASS_NAME, 'google-btn')
     VK_BUTTON = (By.CLASS_NAME, 'vk-btn')

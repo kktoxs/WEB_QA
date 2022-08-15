@@ -1,6 +1,6 @@
 from selenium.webdriver.support.ui import WebDriverWait as Wait
 from selenium.webdriver.support import expected_conditions as EC
-
+from locators.base_page_locators import BasePageLocators as Locators
 
 class BasePage:
     def __init__(self, driver, url):
@@ -18,3 +18,6 @@ class BasePage:
 
     def scroll_down(self):
         self.driver.execute_script("window.scrollTo(0, 1000)")
+
+    def switch_lang_to_en(self):
+        self.element(Locators.LANGUAGE_ENG).click()
