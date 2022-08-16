@@ -1,11 +1,12 @@
 import time
 
+from conftest import BASE_URL
 from pages.base_page import BasePage
 from locators.auth_page_locators import AuthPageLocators as Locators
 
 
 class AuthPage(BasePage):
-    url = 'https://planetfor.me/auth'
+    url = BASE_URL + '/auth'
 
     def __init__(self, driver):
         super().__init__(driver, self.url)

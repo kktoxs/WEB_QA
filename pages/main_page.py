@@ -1,9 +1,10 @@
+from conftest import BASE_URL
 from pages.base_page import BasePage
 from locators.main_page_locators import MainPageLocators as Locators
 
 
 class MainPage(BasePage):
-    url = 'https://planetfor.me/'
+    url = BASE_URL
 
     def __init__(self, driver):
         super().__init__(driver, self.url)

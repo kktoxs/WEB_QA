@@ -2,6 +2,7 @@ from selenium.webdriver.support.ui import WebDriverWait as Wait
 from selenium.webdriver.support import expected_conditions as EC
 from locators.base_page_locators import BasePageLocators as Locators
 
+
 class BasePage:
     def __init__(self, driver, url):
         self.driver = driver
@@ -21,3 +22,6 @@ class BasePage:
 
     def switch_lang_to_en(self):
         self.element(Locators.LANGUAGE_ENG).click()
+
+    def switch_lang_to_ru(self):
+        self.element(Locators.LANGUAGE_RU).click()

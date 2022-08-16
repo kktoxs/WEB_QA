@@ -1,15 +1,16 @@
+from conftest import BASE_URL
 from pages.base_page import BasePage
 from locators.search_page_locators import SearchPageLocators as Locators
 
 
 class SearchPage(BasePage):
-    url = 'https://planetfor.me'
+    url = BASE_URL
 
     def __init__(self, driver):
         super(SearchPage, self).__init__(driver, self.url)
 
     def search(self, text):
-        self.url = f'https://planetfor.me/search?inquiry={text}'
+        self.url += f'/search?inquiry={text}'
         super(SearchPage, self).open()
 
     def filter_places(self):

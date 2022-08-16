@@ -14,3 +14,6 @@ def driver():
     yield driver
     # time.sleep(10)
     driver.quit()
+
+
+BASE_URL = 'https://planetfor.me'
