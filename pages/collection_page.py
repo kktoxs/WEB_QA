@@ -23,7 +23,6 @@ class CollectionPage(BasePage):
         if color == 'rgb(152, 160, 173)':
             return 'GREY'
 
-
     def save(self):
         self.element(Locators.SAVES).click()
 
