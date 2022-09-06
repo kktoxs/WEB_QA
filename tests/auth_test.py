@@ -5,6 +5,7 @@ from pages.profile_page import ProfilePage
 
 
 class TestAuthPage:
+    # тексты ошибок
     wrong_password_error = "Не удаётся войти. Пожалуйста, проверьте правильность написания логина и пароля."
     wrong_password_error_eng = 'Wrong credentials. Please check your login and password.'
 

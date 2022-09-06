@@ -7,6 +7,7 @@ class MainPageLocators:
 
     #  FEED
     CREATE = (By.CSS_SELECTOR, 'svg[data-qa="select-creation-item"]')
+    CREATION_ITEM = (By.CSS_SELECTOR, 'div[data-qa="creation-item"]')
 
     USER_MENU = (By.CSS_SELECTOR, 'a[data-qa="user-menu-button"]')
     PROFILE = (By.CSS_SELECTOR, 'a[data-qa="link-user"]')
