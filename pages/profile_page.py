@@ -16,13 +16,13 @@ class ProfilePage(BasePage):
         return self.element(Locators.LOGIN).text
 
     def show_private(self):
-        self.element(Locators.PRIVATE).click()
+        self.elements(Locators.PUBLIC_PRIVATE)[1].click()
+
+    def show_public(self):
+        self.elements(Locators.PUBLIC_PRIVATE)[0].click()
 
     def show_on_map(self):
         self.element(Locators.SHOW_ON_MAP).click()
 
     def get_show_on_map_counter(self):
         return self.element(Locators.SHOW_ON_MAP_COUNTER).text
-
-    def open_personal(self):
-        self.element(Locators.PRIVATE).click()

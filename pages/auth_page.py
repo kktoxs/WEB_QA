@@ -6,7 +6,7 @@ from locators.auth_page_locators import AuthPageLocators as Locators
 
 
 class AuthPage(BasePage):
-    url = BASE_URL + '/auth'
+    url = BASE_URL  # + '/auth'
 
     def __init__(self, driver):
         super().__init__(driver, self.url)
@@ -15,10 +15,13 @@ class AuthPage(BasePage):
     def sign_in_with_mail(self, email, password):
         self.element(Locators.TOP_CORNER_SIGN_IN_BUTTON).click()
         self.element(Locators.SIGN_IN_BUTTON).click()
+        time.sleep(1)
         self.element(Locators.EMAIL_SWITCH).click()
+        time.sleep(1)
         self.element(Locators.LOGIN_INPUT).send_keys(email)
         self.element(Locators.PASSWORD_INPUT).send_keys(password)
         self.element(Locators.CONTINUE_BUTTON).click()
+        time.sleep(1)
 
     # def submit(self):
     #     self.element(Locators.CONTINUE_BUTTON).click()

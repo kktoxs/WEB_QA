@@ -21,7 +21,7 @@ class TestAuthPage:
         profile_page = ProfilePage(driver)
         auth_page = AuthPage(driver)
         auth_page.sign_in_with_mail('ktox', '123123123')
-        # auth_page.submit()
+        auth_page.open_my_profile()
         assert profile_page.get_login() == 'ktox', 'Неправильный логин в профиле'
 
     def test_sign_in_wrong_password(self, driver):
@@ -44,7 +44,7 @@ class TestAuthPage:
         # ошибка на англ
         auth_page.switch_lang_to_en()
         error_eng = auth_page.get_reset_error_message()
-        assert error_eng == self.unregistered_email_eng
+        assert error_eng == self.no_such_user_error_eng
 
     def test_reset_password_incorrect(self, driver):
         auth_page = AuthPage(driver)

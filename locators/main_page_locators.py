@@ -8,7 +8,7 @@ class MainPageLocators:
     #  FEED
     CREATE = (By.CSS_SELECTOR, 'svg[data-qa="select-creation-item"]')
 
-    USER_MENU = (By.CSS_SELECTOR, 'div[data-qa="user-menu-button"]')
+    USER_MENU = (By.CSS_SELECTOR, 'a[data-qa="user-menu-button"]')
     PROFILE = (By.CSS_SELECTOR, 'a[data-qa="link-user"]')
     SETTINGS = (By.CSS_SELECTOR, 'svg[data-qa="navbar-settings-button"]')
     SIGN_OUT = (By.CSS_SELECTOR, 'div[data-qa="link-sign-out"]')

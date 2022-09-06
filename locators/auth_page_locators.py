@@ -2,7 +2,7 @@ from selenium.webdriver.common.by import By
 
 
 class AuthPageLocators:
-    TOP_CORNER_SIGN_IN_BUTTON = (By.CSS_SELECTOR, 'svg[data-qa="user-menu-log-out-button"]')
+    TOP_CORNER_SIGN_IN_BUTTON = (By.CSS_SELECTOR, 'button[data-qa="navbar-log-out-button"]')
     SIGN_IN_BUTTON = (By.CSS_SELECTOR, 'button[data-qa="auth-button"]')
     # SIGN_UP_BUTTON = TODO
     EMAIL_SWITCH = (By.CSS_SELECTOR, 'span[data-qa="switch-button-singUp"]')

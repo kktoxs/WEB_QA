@@ -8,6 +8,7 @@ class SettingsPageLocators:
     EMAIL_INPUT = (By.CSS_SELECTOR, 'input[data-qa="reset-password-email-input"]')
     CITY_INPUT = (By.CSS_SELECTOR, 'input[data-qa="city-input"]')
     DESCRIPTION = (By.CSS_SELECTOR, 'div[data-qa="about-me"]')
+    CHANGE_BUTTON = (By.CSS_SELECTOR, 'button[data-qa="change-button"]')
 
     CHANGE_PASSWORD = (By.CSS_SELECTOR, 'button[data-qa="settings-change-password-button"]')
     OLD_PASSWORD_INPUT = (By.CSS_SELECTOR, 'input[data-qa="old-password-input"]')

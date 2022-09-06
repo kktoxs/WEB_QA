@@ -32,7 +32,7 @@ class TestProfilePage:
         auth_page.sign_in_with_mail('ktox', '123123123')
         # auth_page.submit()
         main_page.open_my_profile()
-        profile_page.open_personal()
+        profile_page.show_private()
         # до обновления страницы
         show_on_map_text = profile_page.get_show_on_map_counter()
         assert show_on_map_text != '0 мест'

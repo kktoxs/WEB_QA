@@ -11,10 +11,13 @@ class BasePage:
     def open(self):
         self.driver.get(self.url)
 
-    def element(self, locator, timeout=5):
+    def open_my_profile(self):
+        self.element(Locators.MY_PROFILE).click()
+
+    def element(self, locator, timeout=7):
         return Wait(self.driver, timeout).until(EC.visibility_of_element_located(locator))
 
-    def elements(self, locator, timeout=5):
+    def elements(self, locator, timeout=7):
         return Wait(self.driver, timeout).until(EC.visibility_of_all_elements_located(locator))
 
     def scroll_down(self):
