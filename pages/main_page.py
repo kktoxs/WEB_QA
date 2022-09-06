@@ -15,19 +15,19 @@ class MainPage(BasePage):
     def search(self, text):
         self.element(Locators.SEARCH).send_keys(text + '\n')
 
-    def create_place(self):
+    def new_place(self):
         self.element(Locators.CREATE).click()
         self.elements(Locators.CREATION_ITEM)[0].click()
 
-    def create_link(self):
+    def new_link(self):
         self.element(Locators.CREATE).click()
         self.elements(Locators.CREATION_ITEM)[1].click()
 
-    def create_note(self):
+    def new_note(self):
         self.element(Locators.CREATE).click()
         self.elements(Locators.CREATION_ITEM)[2].click()
 
-    def create_collection(self):
+    def new_collection(self):
         self.element(Locators.CREATE).click()
         self.elements(Locators.CREATION_ITEM)[3].click()
 
