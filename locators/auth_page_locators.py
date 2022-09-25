@@ -18,15 +18,14 @@ class AuthPageLocators:
     SHOW_PASSWORD_BUTTON = (By.CSS_SELECTOR, 'div[data-qa="show-password-button"]')
     RESET_PASSWORD_BUTTON = (By.CSS_SELECTOR, 'span[data-qa="reset-password-button"]')
     RESET_PASSWORD_SEND_CODE_BUTTON = (By.CSS_SELECTOR, 'button[data-qa="reset-password-button"]')
-    RESET_PASSWORD_ERROR_MESSAGE = (By.CLASS_NAME, 'form-credentials-error')
     RESET_EMAIL_INPUT = (By.CSS_SELECTOR, 'input[data-qa="reset-password-email-input"]')
     GOOGLE_BUTTON = (By.CLASS_NAME, 'google-btn')
     VK_BUTTON = (By.CLASS_NAME, 'vk-btn')
-    ERROR_MESSAGE = (By.CSS_SELECTOR, 'span[data-qa="auth-credentials-error"]')
+
+    ERROR_MESSAGE = (By.CLASS_NAME, 'form-credentials-error')
 
     REGISTER_EMAIL_INPUT = (By.CSS_SELECTOR, 'input[data-qa="reset-password-email-input"]')
     REGISTER_PASSWORD_INPUT = (By.CSS_SELECTOR, 'input[data-qa="auth-password-input"]')
     REGISTER_PASSWORD_CONFIRM_INPUT = (By.CSS_SELECTOR, 'input[data-qa="reset-password-confirm-password-input"]')
-    REGISTER_ERROR_MESSAGE = (By.CLASS_NAME, 'form-credentials-error')
 
 
