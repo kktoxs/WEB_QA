@@ -13,8 +13,16 @@ class AuthPage(BasePage):
         super().__init__(driver, self.url)
         super(AuthPage, self).open()  # страницы авторизации автоматически открываются при создании
 
-    def sign_in_with_mail(self, email, password):
+    def top_corner_sign_in_button_click(self):
         self.element(Locators.TOP_CORNER_SIGN_IN_BUTTON).click()
+        time.sleep(1)
+
+    def center_sign_in_button_click(self):
+        self.element(Locators.CENTER_SING_IN_BUTTON).click()
+        time.sleep(1)
+
+    def sign_in_with_mail(self, email, password):
+        self.top_corner_sign_in_button_click()
         self.elements(Locators.SIGN_BUTTONS)[0].click()
         time.sleep(1)
         self.element(Locators.EMAIL_SWITCH).click()
@@ -39,17 +47,17 @@ class AuthPage(BasePage):
 
     def sign_in_with_phone(self, phone):
         self.element(Locators.TOP_CORNER_SIGN_IN_BUTTON).click()
-        self.elements(Locators.SIGN_BUTTONS)[1].click()
+        self.elements(Locators.SIGN_BUTTONS)[0].click()
         self.element(Locators.PHONE_NUMBER_INPUT).send_keys(phone)
         time.sleep(1)
         self.element(Locators.CONTINUE_BUTTON).click()
 
-    def reset_password(self, email):
-        self.element(Locators.RESET_PASSWORD_BUTTON).click()
+    def sign_up_with_phone(self, phone):
+        self.element(Locators.TOP_CORNER_SIGN_IN_BUTTON).click()
+        self.elements(Locators.SIGN_BUTTONS)[1].click()
+        self.element(Locators.PHONE_NUMBER_INPUT).send_keys(phone)
         time.sleep(1)
-        self.element(Locators.EMAIL_SWITCH).click()
-        self.element(Locators.RESET_EMAIL_INPUT).send_keys(email)
-        #  self.element(Locators.RESET_PASSWORD_SEND_CODE_BUTTON).click()  жду пока исправят задвоение блока
+        self.element(Locators.CONTINUE_BUTTON).click()
 
     def error_message(self):
         return self.element(Locators.ERROR_MESSAGE).text
@@ -66,14 +74,24 @@ class AuthPage(BasePage):
 
     def check_error_message_ru(self, error_ru):
         self.switch_lang_to_ru()
-        print(self.error_message())
+        print(f'\nТекущая ошибка: {self.error_message()} \nОжидаемая ошибка: {error_ru}')
         assert self.error_message() == error_ru, "неправильное сообщение об ошибке на русском"
 
     def check_error_message_en(self, error_en):
         self.switch_lang_to_en()
-        #assert self.error_message() == error_en, "неправильное сообщение об ошибке на английском"
+        print(f'\nТекущая ошибка: {self.error_message()} \nОжидаемая ошибка: {error_en}')
+        assert self.error_message() == error_en, "неправильное сообщение об ошибке на английском"
 
-    def check_error_message(self, error_ru, error_eng): # какого хуя
+    def check_error_message(self, error_ru, error_eng):  # какого хуя
+        time.sleep(1)
         self.check_error_message_ru(error_ru)
         self.check_error_message_en(error_eng)
         self.switch_lang_to_ru()  # обратно на русский
+
+    def reset_password_with_mail(self, mail):
+        self.element(Locators.RESET_PASSWORD_BUTTON).click()
+        time.sleep(1)
+        self.element(Locators.EMAIL_SWITCH).click()
+        time.sleep(1)
+        self.element(Locators.RESET_EMAIL_INPUT).send_keys(mail + '\n')
+        # self.element(Locators.RESET_PASSWORD_SEND_CODE_BUTTON).click() жду пока исправят задвоение блока

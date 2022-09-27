@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 
 class AuthPageLocators:
     TOP_CORNER_SIGN_IN_BUTTON = (By.CSS_SELECTOR, 'button[data-qa="navbar-log-out-button"]')
+    CENTER_SING_IN_BUTTON = (By.CSS_SELECTOR, 'div[data-qa="auth-button"]')
 
     SIGN_BUTTONS = (By.CSS_SELECTOR, 'button[data-qa="auth-button"]')
 
@@ -15,6 +16,7 @@ class AuthPageLocators:
     PASSWORD_INPUT = (By.CSS_SELECTOR, 'input[data-qa="auth-password-input"]')
 
     CONTINUE_BUTTON = (By.CSS_SELECTOR, 'button[data-qa="sign-in-button"]')
+
     SHOW_PASSWORD_BUTTON = (By.CSS_SELECTOR, 'div[data-qa="show-password-button"]')
     RESET_PASSWORD_BUTTON = (By.CSS_SELECTOR, 'span[data-qa="reset-password-button"]')
     RESET_PASSWORD_SEND_CODE_BUTTON = (By.CSS_SELECTOR, 'button[data-qa="reset-password-button"]')
