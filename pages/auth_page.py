@@ -32,6 +32,9 @@ class AuthPage(BasePage):
         self.element(Locators.CONTINUE_BUTTON).click()
         time.sleep(1)
 
+    def sign_in_ktox(self):
+        self.sign_in_with_mail('ktox', '123123123')
+
     def sign_up_with_mail(self, email, password, confirm_password):
         self.element(Locators.TOP_CORNER_SIGN_IN_BUTTON).click()
         self.elements(Locators.SIGN_BUTTONS)[1].click()

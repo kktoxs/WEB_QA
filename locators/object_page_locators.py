@@ -14,6 +14,7 @@ class ObjectPageLocators:
     NEXT_IMAGE_BUTTON = (By.CSS_SELECTOR, 'svg[data-qa="nav-btn-right"]')
 
     SHARE_BUTTON = (By.CSS_SELECTOR, 'button[data-qa="action-button-share"]')
+    COPY_SHARE_LINK = (By.CSS_SELECTOR, 'button[data-qa="copy-share-link-button"]')
     SAVE_BUTTON = (By.CSS_SELECTOR, 'button[data-qa="action-button-save"]')
 
     TYPE = (By.CSS_SELECTOR, 'p[data-qa="type-chip"]')

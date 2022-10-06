@@ -35,13 +35,12 @@ class TestCreation:
         creation_page = CreationPage(driver)
         main_page = MainPage(driver)
 
-        auth_page.sign_in_with_mail('ktoxtest', '123123123')
-        for i in range(1, 500):
-            main_page.new_note()
-            random_number = random.randint(1, 100)
-            creation_page.create_note(f'автотестовая заметка {random_number}', 'описание')
-            creation_page.select_category(random.randint(0, 13))
-            creation_page.save_to_public()
+        auth_page.sign_in_with_mail('ktox', '123123123')
+        main_page.new_note()
+        random_number = random.randint(1, 100)
+        creation_page.create_note(f'автотестовая заметка {random_number}', 'описание')
+        creation_page.select_category(random.randint(0, 13))
+        creation_page.save_to_public()
         time.sleep(3)
 
     def test_create_collection(self, driver):

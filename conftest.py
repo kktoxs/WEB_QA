@@ -16,4 +16,7 @@ def driver():
     driver.quit()
 
 
+KTOX_ID = 23475
+DENCHIG_ID = 15
 BASE_URL = 'https://planetfor.me'
+#  BASE_URL = 'https://stage-web.pfm.team'
