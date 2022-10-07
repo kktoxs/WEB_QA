@@ -24,8 +24,10 @@ class ObjectPage(BasePage):
 
     def check_like(self):
         before = int(self.get_likes_counter())
+        print(f"\nДо лайка: {before}")
         self.like()
         after = int(self.get_likes_counter())
+        print(f"\nПосле лайка: {after}")
         assert before == after - 1
         self.like()  # возвращаю как было
 

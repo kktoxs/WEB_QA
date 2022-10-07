@@ -43,7 +43,7 @@ class TestAuthPage:
     def test_sign_in_login(self, driver):  # 304
         profile_page = ProfilePage(driver)
         auth_page = AuthPage(driver)
-        auth_page.sign_in_with_mail('ktox', '123123123')
+        auth_page.sign_in_ktox()
         auth_page.open_my_profile()
         assert profile_page.get_login() == 'ktox', 'Неправильный логин в профиле'
 
@@ -153,4 +153,6 @@ class TestAuthPage:
 
     def test_reset_password_with_incorrect_mail(self, driver):
         auth_page = AuthPage(driver)
-        auth_page.reset_password_with_mail()
+        auth_page.sign_in_with_mail('email', 'password')
+        auth_page.reset_password_with_mail('incorrect_mail')
+        auth_page.check_error_message(self.incorrect_email, self.incorrect_email_eng)

@@ -18,12 +18,15 @@ class AuthPage(BasePage):
         time.sleep(1)
 
     def center_sign_in_button_click(self):
+        time.sleep(5)
+        self.element(Locators.CENTER_SING_IN_BUTTON).click()
         self.element(Locators.CENTER_SING_IN_BUTTON).click()
         time.sleep(1)
 
     def sign_in_with_mail(self, email, password):
         self.top_corner_sign_in_button_click()
-        self.elements(Locators.SIGN_BUTTONS)[0].click()
+        time.sleep(1)
+        self.elements(Locators.SIGN_BUTTONS)[1].click()
         time.sleep(1)
         self.element(Locators.EMAIL_SWITCH).click()
         time.sleep(1)
@@ -37,7 +40,8 @@ class AuthPage(BasePage):
 
     def sign_up_with_mail(self, email, password, confirm_password):
         self.element(Locators.TOP_CORNER_SIGN_IN_BUTTON).click()
-        self.elements(Locators.SIGN_BUTTONS)[1].click()
+        time.sleep(1)
+        self.elements(Locators.SIGN_BUTTONS)[0].click()
         time.sleep(1)
         self.element(Locators.EMAIL_SWITCH).click()
         time.sleep(1)
@@ -50,14 +54,18 @@ class AuthPage(BasePage):
 
     def sign_in_with_phone(self, phone):
         self.element(Locators.TOP_CORNER_SIGN_IN_BUTTON).click()
-        self.elements(Locators.SIGN_BUTTONS)[0].click()
+        self.elements(Locators.SIGN_BUTTONS)[1].click()
         self.element(Locators.PHONE_NUMBER_INPUT).send_keys(phone)
         time.sleep(1)
         self.element(Locators.CONTINUE_BUTTON).click()
 
     def sign_up_with_phone(self, phone):
         self.element(Locators.TOP_CORNER_SIGN_IN_BUTTON).click()
-        self.elements(Locators.SIGN_BUTTONS)[1].click()
+        time.sleep(1)
+        self.elements(Locators.SIGN_BUTTONS)[0].click()
+        time.sleep(1)
+        self.element(
+            Locators.PHONE_NUMBER_INPUT).click()  # какая то хрень с фокусом в поле телефона, нужно сперва кликуть
         self.element(Locators.PHONE_NUMBER_INPUT).send_keys(phone)
         time.sleep(1)
         self.element(Locators.CONTINUE_BUTTON).click()

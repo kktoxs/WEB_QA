@@ -62,7 +62,6 @@ class TestProfilePage:
         auth_page = AuthPage(driver)
         profile_page = ProfilePage(driver)
         auth_page.sign_in_ktox()
-        #  предварительно подписываюсь
         profile_page.open_profile(DENCHIG_ID)  # денчик
         profile_page.subscribe()
         subscriptions_before = profile_page.get_my_subscriptions_count()

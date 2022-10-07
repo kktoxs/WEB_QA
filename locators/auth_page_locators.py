@@ -7,6 +7,9 @@ class AuthPageLocators:
 
     SIGN_BUTTONS = (By.CSS_SELECTOR, 'button[data-qa="auth-button"]')
 
+    # SIGN_IN = (By.CSS_SELECTOR, 'button[data-qa="auth-button"]')[1]
+    # SIGN_UP = (By.CSS_SELECTOR, 'button[data-qa="auth-button"]')[0]
+
     EMAIL_SWITCH = (By.CSS_SELECTOR, 'span[data-qa="switch-button-singUp"]')
     MOBILE_SWITCH = (By.CSS_SELECTOR, 'span[data-qa="switch-button--enter"]')
 
