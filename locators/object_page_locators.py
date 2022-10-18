@@ -20,7 +20,8 @@ class ObjectPageLocators:
     TYPE = (By.CSS_SELECTOR, 'p[data-qa="type-chip"]')
     CATEGORY = (By.CSS_SELECTOR, 'p[data-qa="category-chip"]')
 
-    INFO = (By.CLASS_NAME, 'info-icon-wrap')
+    INFO_BUTTON = (By.CLASS_NAME, 'info-icon-wrap')
+    INFO = (By.CLASS_NAME, 'entity-info-date')
     LIKES = (By.CSS_SELECTOR, 'span[data-qa="like-counter"]')
     SAVES = (By.CSS_SELECTOR, 'span[data-qa="save-counter"]')
     CONTEXT_MENU = (By.CLASS_NAME, 'class="ctx-icon"')

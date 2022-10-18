@@ -1,3 +1,5 @@
+import time
+
 from conftest import BASE_URL
 from pages.base_page import BasePage
 from locators.main_page_locators import MainPageLocators as Locators
@@ -30,4 +32,8 @@ class MainPage(BasePage):
     def new_collection(self):
         self.element(Locators.CREATE).click()
         self.elements(Locators.CREATION_ITEM)[3].click()
+
+    def open_feed(self):
+        self.element(Locators.FEED).click()
+        time.sleep(2)
 

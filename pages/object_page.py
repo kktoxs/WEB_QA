@@ -56,3 +56,6 @@ class ObjectPage(BasePage):
 
     def open_link_from_clipboard(self, link):
         self.driver.get(link)
+
+    def get_info(self):
+        return self.element(Locators.INFO).text

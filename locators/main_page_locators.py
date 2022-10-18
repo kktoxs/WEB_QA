@@ -5,7 +5,7 @@ class MainPageLocators:
     LOGO = (By.CSS_SELECTOR, 'svg[data-qa="navbar-logo-desktop"]')
     SEARCH = (By.CSS_SELECTOR, 'input[data-qa="navbar-search-input"]')
 
-    #  FEED
+    FEED = (By.CLASS_NAME, 'feed')
     CREATE = (By.CSS_SELECTOR, 'svg[data-qa="select-creation-item"]')
     CREATION_ITEM = (By.CSS_SELECTOR, 'div[data-qa="creation-item"]')
 
