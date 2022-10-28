@@ -9,6 +9,8 @@ class CollectionPage(BasePage):
     def __init__(self, driver, collection_num):
         collection_url = self.url + str(collection_num)
         super().__init__(driver, collection_url)
+
+    def open(self):
         super(CollectionPage, self).open()
 
     def like(self):
@@ -28,3 +30,6 @@ class CollectionPage(BasePage):
 
     def get_show_on_map_counter(self):
         return self.element(Locators.SHOW_ON_MAP_COUNTER).text
+
+    def get_author(self):
+        return self.element(Locators.AUTHOR).text

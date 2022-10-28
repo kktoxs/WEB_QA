@@ -4,7 +4,7 @@ from selenium.webdriver.common.by import By
 class ObjectPageLocators:
     NAME = (By.CSS_SELECTOR, 'h1[data-qa="item-name"]')
     AUTHOR = (By.CSS_SELECTOR, 'a[data-qa="author-view"]')
-    AUTHOR_NAME = (By.CLASS_NAME, 'f-lineClamp-vertical-1')
+    AUTHOR_NAME = (By.CSS_SELECTOR, 'p[class="ml-8 f-lineClamp-vertical-1"]')
 
     IMAGE = (By.CLASS_NAME, 'image__wrapper')
     IMAGE_COUNTER = (By.CSS_SELECTOR, 'span[data-qa="item-cover-counter"]')

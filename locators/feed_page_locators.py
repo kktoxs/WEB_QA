@@ -19,3 +19,5 @@ class FeedPageLocators:
     FILTER_BUTTON = (By.CLASS_NAME, 'feed-filtration-icon')
     TYPE = (By.CLASS_NAME, 'filtration-group-name')
     CATEGORY = (By.CLASS_NAME, 'filtration-category-name')
+
+    SUBSCRIPTIONS_WORLD = (By.CLASS_NAME, 'toggleSwitch-buttons')

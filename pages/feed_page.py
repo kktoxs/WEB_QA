@@ -1,5 +1,7 @@
 import time
 
+from selenium.webdriver import Keys
+
 from conftest import BASE_URL
 from pages.base_page import BasePage
 
@@ -12,18 +14,18 @@ class FeedPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver, self.url)
 
-    def like(self):
-        self.element(Locators.LIKE).click()
+    def like(self, i):
+        self.elements(Locators.LIKE)[i].click()
 
-    def get_like_counter(self):
-        return self.element(Locators.LIKE).text
+    def get_like_counter(self, i):
+        return self.elements(Locators.LIKE)[i].text
 
-    def save_to_profile(self):
-        self.element(Locators.SAVE).click()
+    def save_to_profile(self, i):
+        self.elements(Locators.SAVE)[i].click()
         time.sleep(1)
 
-    def get_author_name(self):
-        string = self.elements(Locators.PUBLISH_TEXT)[0].text
+    def get_author_name(self, i):
+        string = self.elements(Locators.PUBLISH_TEXT)[i].text
         login = string.split(' ', 1)[0]
         return login
 
@@ -36,8 +38,8 @@ class FeedPage(BasePage):
     def category(self):
         return self.element(Locators.ITEM_CATEGORY).text
 
-    def open_item(self):
-        self.element(Locators.ITEM_NAME).click()
+    def open_item(self, i):
+        self.elements(Locators.ITEM_NAME)[i].click()
 
     def item_name(self):
         return self.element(Locators.ITEM_NAME).text
@@ -50,13 +52,29 @@ class FeedPage(BasePage):
                 break
         print("Нет подборок в ленте")
 
-    def like_collection(self):
+    def like_collection_and_check(self):
         categories = self.elements(Locators.ITEM_CATEGORY)
         for i in range(len(categories)):
             if categories[i].text == "ПОДБОРКА":
-                self.elements(Locators.LIKE)[i].click()
-                break
+                before = self.get_like_counter(i)
+                self.like(i)
+                after = self.get_like_counter(i)
+                print(f"\nПодборка: было {before}, стало {after}")
+                assert before != after, "сломался лайк в ленте у подборки"
+                return
         print("Нет подборок в ленте")
+
+    def like_item_and_check(self):
+        categories = self.elements(Locators.ITEM_CATEGORY)
+        for i in range(len(categories)):
+            if categories[i].text != "ПОДБОРКА":
+                before = self.get_like_counter(i)
+                self.like(i)
+                after = self.get_like_counter(i)
+                print(f"\nСущность: было {before}, стало {after}")
+                assert before != after, "сломался лайк в ленте у сущности"
+                return
+        print("Нет сущностей в ленте")
 
     def reset_filters(self):
         self.element(Locators.FILTER_BUTTON).click()
@@ -65,6 +83,20 @@ class FeedPage(BasePage):
         self.elements(Locators.CATEGORY)[0].click()
         self.element(Locators.FILTER_BUTTON).click()
         time.sleep(1)
+
+    def get_all_publications(self):
+        return self.elements(Locators.ITEM_NAME)
+
+    def compare_posts(self, first, second):
+        first.click()
+        prev_url = self.driver.tabs_handles[1]
+        time.sleep(3)
+        self.driver.switch_to.window(self.driver.window_handles[0])
+        time.sleep(3)
+        second.click()
+        time.sleep(3)
+        next_url = self.driver.current_url
+        assert prev_url != next_url, f"Дубли в ленте: {next_url}"
 
     def check_only_collection_in_feed(self):
         publishes = self.elements(Locators.PUBLISH_TEXT)
@@ -98,6 +130,12 @@ class FeedPage(BasePage):
             if categories[i].text != category.upper():
                 assert False, f"\nВ ленте пост, не соответствующий фильтру \"{category}\"\n" \
                               f"Категория - {categories[i].text}"
+
+    def switch_to_subscriptions(self):
+        self.elements(Locators.SUBSCRIPTIONS_WORLD)[0].click()
+
+    def switch_to_world(self):
+        self.elements(Locators.SUBSCRIPTIONS_WORLD)[1].click()
 
     def check_only_diff_in_feed(self):
         self.check_only_category_in_feed('разное')
@@ -165,6 +203,11 @@ class FeedPage(BasePage):
         self.filter_by_type(2)
 
     def filter_notes(self):
+        self.filter_by_type(3)
+
+    def filter_items(self):
+        self.filter_by_type(1)
+        self.filter_by_type(2)
         self.filter_by_type(3)
 
     def filter_collections(self):

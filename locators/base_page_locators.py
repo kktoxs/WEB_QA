@@ -7,3 +7,5 @@ class BasePageLocators:
     LANGUAGE_RU = (By.CSS_SELECTOR, 'button[value="ru"]')
 
     MY_PROFILE = (By.CSS_SELECTOR, 'a[data-qa="user-menu-button"]')
+
+    BODY = (By.TAG_NAME, 'body')

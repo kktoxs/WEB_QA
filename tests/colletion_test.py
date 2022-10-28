@@ -8,6 +8,7 @@ class TestCollectionPage:
     def test_show_on_map_counter(self, driver):
         auth_page = AuthPage(driver)
         collection_page = CollectionPage(driver, 100953)
+        collection_page.open()
 
         auth_page.sign_in_with_mail('ktox', '123123123')
         time.sleep(1)
