@@ -59,3 +59,13 @@ class ObjectPage(BasePage):
 
     def get_info(self):
         return self.element(Locators.INFO).text
+
+    def get_name(self):
+        return self.element(Locators.NAME).text
+
+    def get_category(self):
+        return self.elements(Locators.TYPE_AND_CATEGORY)[1].text
+
+    def get_type(self):
+        return self.elements(Locators.TYPE_AND_CATEGORY)[0].text
+

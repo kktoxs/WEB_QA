@@ -13,6 +13,7 @@ class MainPage(BasePage):
 
     def open_my_profile(self):
         self.element(Locators.USER_MENU).click()
+        time.sleep(1)
 
     def search(self, text):
         self.element(Locators.SEARCH).send_keys(text + '\n')

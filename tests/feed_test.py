@@ -82,7 +82,7 @@ class TestFeed:
         author_in_item = collection_page.get_author()  # жду пока смогу вытащить ник
         assert author_in_item == author_in_feed, 'Неправильный автор подборки'
 
-    def test_read_more(self, driver):
+    def test_read_more(self, driver):  # 373
         auth_page = AuthPage(driver)
         main_page = MainPage(driver)
         feed_page = FeedPage(driver)
@@ -92,7 +92,7 @@ class TestFeed:
         main_page.open_feed()
         feed_page.filter_items()  # жду локатор Читать полностью
 
-    def test_switch_to_world(self, driver):
+    def test_switch_to_world(self, driver):  # 369
         auth_page = AuthPage(driver)
         main_page = MainPage(driver)
         feed_page = FeedPage(driver)

@@ -16,3 +16,6 @@ class ProfilePageLocators:
     SUBSCRIBE_TEXT = (By.CSS_SELECTOR, 'p[class="fw-medium"]')
 
     SUBSCRIBERS_SUBSCRIPTIONS = (By.CLASS_NAME, 'fw-medium')
+
+    ITEMS = (By.CSS_SELECTOR, 'a[data-qa="lite-item-card"]')
+    COLLECTIONS = (By.CSS_SELECTOR, 'a[data-qa="lite-collection-card"]')

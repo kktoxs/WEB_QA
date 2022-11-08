@@ -1,3 +1,5 @@
+import time
+
 from selenium.common import TimeoutException
 
 from conftest import BASE_URL
@@ -63,3 +65,13 @@ class ProfilePage(BasePage):
     def get_my_subscribers_count(self):
         self.open_my_profile()
         return self.get_subscribers_count()
+
+    def open_last_created_item(self):
+        self.elements(Locators.ITEMS)[0].click()
+        time.sleep(1)
+
+    def open_last_created_collection(self):
+        self.elements(Locators.COLLECTIONS)[0].click()
+        time.sleep(1)
+
+

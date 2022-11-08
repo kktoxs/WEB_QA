@@ -9,6 +9,9 @@ class CreationPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver, self.url)
 
+    def create_place(self, title, description):
+        self.element(Locators.TITLE).send_keys(title)
+
     def create_link(self, title, link, description):
         self.element(Locators.TITLE).send_keys(title)
         self.element(Locators.LINK).send_keys(link)

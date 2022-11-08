@@ -33,3 +33,6 @@ class CollectionPage(BasePage):
 
     def get_author(self):
         return self.element(Locators.AUTHOR).text
+
+    def get_name(self):
+        return self.element(Locators.NAME).text
