@@ -16,7 +16,7 @@ class TestCreation:
         creation_page = CreationPage(driver)
         random_number = random.randint(1, 10000)
         # creation_page.
-        auth_page.sign_in_with_mail('ktox', '123123123')
+        auth_page.sign_in_ktox()
         main_page.new_place()
 
         time.sleep(3)
@@ -28,7 +28,7 @@ class TestCreation:
         profile_page = ProfilePage(driver)
         object_page = ObjectPage(driver)
 
-        auth_page.sign_in_with_mail('ktox', '123123123')
+        auth_page.sign_in_ktox()
         main_page.new_link()
         random_number = random.randint(1, 10000)
         creation_page.create_link(f'ссылка {random_number}', f'{random_number}.com', 'описание')
@@ -47,7 +47,7 @@ class TestCreation:
         profile_page = ProfilePage(driver)
         object_page = ObjectPage(driver)
 
-        auth_page.sign_in_with_mail('ktox', '123123123')
+        auth_page.sign_in_ktox()
         main_page.new_note()
         random_number = random.randint(1, 10000)
         creation_page.create_note(f'заметка {random_number}', 'описание')
@@ -66,7 +66,7 @@ class TestCreation:
         profile_page = ProfilePage(driver)
         collection_page = CollectionPage(driver, None)
 
-        auth_page.sign_in_with_mail('ktox', '123123123')
+        auth_page.sign_in_ktox()
         main_page.new_collection()
         random_number = random.randint(1, 10000)
         creation_page.create_collection(f'подборка {random_number}', 'описание')

@@ -1,7 +1,7 @@
 import random
 import time
 
-from conftest import BASE_URL
+from conftest import BASE_URL, TEST_PROFILE_LOGIN, TEST_PROFILE_PASSWORD
 from pages.base_page import BasePage
 from locators.auth_page_locators import AuthPageLocators as Locators
 
@@ -36,7 +36,7 @@ class AuthPage(BasePage):
         time.sleep(1)
 
     def sign_in_ktox(self):
-        self.sign_in_with_mail('ktox', '123123123')
+        self.sign_in_with_mail(TEST_PROFILE_LOGIN, TEST_PROFILE_PASSWORD)
 
     def sign_up_with_mail(self, email, password, confirm_password):
         self.element(Locators.TOP_CORNER_SIGN_IN_BUTTON).click()

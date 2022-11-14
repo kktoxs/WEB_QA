@@ -58,14 +58,13 @@ class ObjectPage(BasePage):
         self.driver.get(link)
 
     def get_info(self):
-        return self.element(Locators.INFO).text
+        return self.element(Locators.INFO).text  # data qa
 
     def get_name(self):
-        return self.element(Locators.NAME).text
+        return self.element(Locators.NAME).text  # data qa
 
     def get_category(self):
         return self.elements(Locators.TYPE_AND_CATEGORY)[1].text
 
     def get_type(self):
         return self.elements(Locators.TYPE_AND_CATEGORY)[0].text
-

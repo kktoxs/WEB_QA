@@ -1,5 +1,7 @@
 import time
 
+from selenium.common import TimeoutException
+
 from conftest import DENCHIG_ID, KTOX_ID
 from pages.auth_page import AuthPage
 from pages.main_page import MainPage
@@ -17,7 +19,7 @@ class TestProfilePage:
         # до авторизации
         show_on_map_text = profile_page.get_show_on_map_counter()
         assert show_on_map_text != '0 мест'
-        auth_page.sign_in_with_mail('ktox', '123123123')
+        auth_page.sign_in_ktox()
         # auth_page.submit()
         main_page.open_my_profile()
         # после авторизации
@@ -30,8 +32,7 @@ class TestProfilePage:
         main_page = MainPage(driver)
         auth_page = AuthPage(driver)
 
-        auth_page.sign_in_with_mail('ktox', '123123123')
-        # auth_page.submit()
+        auth_page.sign_in_ktox()
         main_page.open_my_profile()
         profile_page.show_private()
         # до обновления страницы
@@ -69,4 +70,18 @@ class TestProfilePage:
         profile_page.unsubscribe()
         subscriptions_after = profile_page.get_my_subscriptions_count()
         assert subscriptions_before == subscriptions_after + 1
+
+    def test_subscribe_all(self, driver):
+        auth_page = AuthPage(driver)
+        profile_page = ProfilePage(driver)
+        auth_page.sign_in_ktox()
+        for i in range(10000):
+            profile_page.open_profile(i)
+            try:
+                profile_page.subscribe()
+            except TimeoutException:
+                print(i)
+
+
+
 

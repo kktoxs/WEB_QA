@@ -19,13 +19,13 @@ class BasePage:
     def open_my_profile(self):
         self.element(Locators.MY_PROFILE).click()
 
-    def element(self, locator, timeout=10):
+    def element(self, locator, timeout=2):
         try:
             return Wait(self.driver, timeout).until(EC.visibility_of_element_located(locator))
         except TimeoutException:
             print(f"\nЭлемент {locator} не найден")
 
-    def elements(self, locator, timeout=10):
+    def elements(self, locator, timeout=2):
         return Wait(self.driver, timeout).until(EC.visibility_of_all_elements_located(locator))
 
     def scroll_down(self):

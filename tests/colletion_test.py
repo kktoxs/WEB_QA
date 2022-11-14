@@ -10,8 +10,7 @@ class TestCollectionPage:
         collection_page = CollectionPage(driver, 100953)
         collection_page.open()
 
-        auth_page.sign_in_with_mail('ktox', '123123123')
-        time.sleep(1)
+        auth_page.sign_in_ktox()
         show_on_map_counter = collection_page.get_show_on_map_counter()
         assert show_on_map_counter != '0 мест'
         driver.refresh()

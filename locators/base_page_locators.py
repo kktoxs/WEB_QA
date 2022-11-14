@@ -6,6 +6,6 @@ class BasePageLocators:
     LANGUAGE_ENG = (By.CSS_SELECTOR, 'button[value="en"]')
     LANGUAGE_RU = (By.CSS_SELECTOR, 'button[value="ru"]')
 
-    MY_PROFILE = (By.CSS_SELECTOR, 'a[data-qa="user-menu-button"]')
+    MY_PROFILE = (By.CSS_SELECTOR, 'button[data-qa="navbar-log-out-button"]')
 
     BODY = (By.TAG_NAME, 'body')

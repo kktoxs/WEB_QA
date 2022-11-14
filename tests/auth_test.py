@@ -1,6 +1,6 @@
 import time
 
-from conftest import BASE_URL
+from conftest import BASE_URL, TEST_PROFILE_LOGIN, TEST_PROFILE_MAIL, TEST_PROFILE_PASSWORD
 from pages.auth_page import AuthPage
 from pages.profile_page import ProfilePage
 
@@ -45,28 +45,28 @@ class TestAuthPage:
         auth_page = AuthPage(driver)
         auth_page.sign_in_ktox()
         auth_page.open_my_profile()
-        assert profile_page.get_login() == 'ktox', 'Неправильный логин в профиле'
+        assert profile_page.get_login() == TEST_PROFILE_LOGIN, 'Неправильный логин в профиле'
 
     def test_sign_in_mail(self, driver):  # 305
         profile_page = ProfilePage(driver)
         auth_page = AuthPage(driver)
-        auth_page.sign_in_with_mail('ktoxsyrovv@inbox.ru', '123123123')
+        auth_page.sign_in_with_mail(TEST_PROFILE_MAIL, TEST_PROFILE_PASSWORD)
         auth_page.open_my_profile()
-        assert profile_page.get_login() == 'ktox', 'Неправильный логин в профиле'
+        assert profile_page.get_login() == TEST_PROFILE_LOGIN, 'Неправильный логин в профиле'
 
     def test_sign_in_with_login_wrong_password(self, driver):  # 307
         auth_page = AuthPage(driver)
-        auth_page.sign_in_with_mail('ktox', 'wrongpasswd')
+        auth_page.sign_in_with_mail(TEST_PROFILE_LOGIN, 'wrongpasswd')
         auth_page.check_error_message(self.wrong_password_error, self.wrong_password_error_eng)
 
     def test_sign_in_with_mail_wrong_password(self, driver):  # 307.2
         auth_page = AuthPage(driver)
-        auth_page.sign_in_with_mail('ktoxsyrovv@inbox.ru', 'wrongpasswd')
+        auth_page.sign_in_with_mail(TEST_PROFILE_MAIL, 'wrongpasswd')
         auth_page.check_error_message(self.wrong_password_error, self.wrong_password_error_eng)
 
     def test_sign_in_with_mail_incorrect(self, driver):  # 308
         auth_page = AuthPage(driver)
-        auth_page.sign_in_with_mail('ktoxsyrovv@inbox', '123123123')
+        auth_page.sign_in_with_mail(TEST_PROFILE_MAIL, '123123123')
         auth_page.check_error_message(self.no_such_user_error, self.no_such_user_error_eng)
 
     def test_sign_in_no_such_user(self, driver):  # 383
@@ -76,13 +76,13 @@ class TestAuthPage:
 
     def test_reset_password_incorrect_mail(self, driver):  # 311
         auth_page = AuthPage(driver)
-        auth_page.sign_in_with_mail('email', 'password')
+        auth_page.sign_in_with_mail('incorrect@email', 'password')
         auth_page.reset_password_with_mail('incorrect_mail')
         auth_page.check_error_message(self.incorrect_email, self.incorrect_email_eng)
 
     def test_reset_password_unregistered_mail(self, driver):  # 312
         auth_page = AuthPage(driver)
-        auth_page.sign_in_with_mail('email', 'password')
+        auth_page.sign_in_with_mail('unregistered@mail.ru', 'password')
         auth_page.reset_password_with_mail('somefakemail@mail.ru')
         auth_page.check_error_message(self.unregistered_email, self.unregistered_email_eng)
 
