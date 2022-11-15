@@ -1,5 +1,5 @@
 import time
-
+import pyperclip as buffer
 from selenium.common import TimeoutException
 
 from conftest import DENCHIG_ID, KTOX_ID
@@ -14,7 +14,6 @@ class TestProfilePage:
         auth_page = AuthPage(driver)
         main_page = MainPage(driver)
 
-        # profile_page.url = 'https://planetfor.me/user/23475'
         profile_page.open_profile(KTOX_ID)
         # до авторизации
         show_on_map_text = profile_page.get_show_on_map_counter()
@@ -34,7 +33,7 @@ class TestProfilePage:
 
         auth_page.sign_in_ktox()
         main_page.open_my_profile()
-        profile_page.show_private()
+        profile_page.switch_to_personal()
         # до обновления страницы
         show_on_map_text = profile_page.get_show_on_map_counter()
         assert show_on_map_text != '0 мест'
@@ -71,17 +70,83 @@ class TestProfilePage:
         subscriptions_after = profile_page.get_my_subscriptions_count()
         assert subscriptions_before == subscriptions_after + 1
 
-    def test_subscribe_all(self, driver):
+    # def test_subscribe_all(self, driver):
+    #     auth_page = AuthPage(driver)
+    #     profile_page = ProfilePage(driver)
+    #     auth_page.sign_in_ktox()
+    #     for i in range(10000):
+    #         profile_page.open_profile(i)
+    #         try:
+    #             profile_page.subscribe()
+    #         except TimeoutException:
+    #             print(i)
+
+    def test_share_profile(self, driver):
+        profile_page = ProfilePage(driver)
+        profile_page.open_profile(DENCHIG_ID)
+        profile_page.share_profile()
+        copied_url = buffer.paste()
+        driver.get(copied_url)
+        assert profile_page.get_login() == 'denchig', 'ссылка с профиля denchig ведет не туда'
+        profile_page.open_profile(KTOX_ID)
+        profile_page.share_profile()
+        copied_url = buffer.paste()
+        driver.get(copied_url)
+        assert profile_page.get_login() == 'ktox_ui', 'ссылка с профиля ktox ведет не туда'
+
+    def test_subscriptions_count(self, driver):  # 328
+        profile_page = ProfilePage(driver)
+        profile_page.open_profile(KTOX_ID)
+        subscriptions_count_in_profile = profile_page.get_subscriptions_count()
+        subscriptions_count_in_subscriptions = profile_page.count_subscriptions()
+        assert subscriptions_count_in_subscriptions == subscriptions_count_in_profile
+        profile_page.open_profile(DENCHIG_ID)
+        subscriptions_count_in_profile = profile_page.get_subscriptions_count()
+        subscriptions_count_in_subscriptions = profile_page.count_subscriptions()
+        assert subscriptions_count_in_subscriptions == subscriptions_count_in_profile
+
+    def test_subscribers_count(self, driver):  # 327
+        profile_page = ProfilePage(driver)
+        profile_page.open_profile(KTOX_ID)
+        subscribers_count_in_profile = profile_page.get_subscribers_count()
+        subscribers_count_in_subscribers = profile_page.count_subscribers()
+        assert subscribers_count_in_profile == subscribers_count_in_subscribers
+        profile_page.open_profile(DENCHIG_ID)
+        subscribers_count_in_profile = profile_page.get_subscribers_count()
+        subscribers_count_in_subscribers = profile_page.count_subscribers()
+        assert subscribers_count_in_profile == subscribers_count_in_subscribers
+
+    def test_collections_in_profile(self, driver):  # 330
+        profile_page = ProfilePage(driver)
+
+        profile_page.open_profile(KTOX_ID)
+        collections_fits_in_profile = profile_page.get_collections_count() <= 6
+        assert collections_fits_in_profile != profile_page.check_if_show_collections_button_is_visible()
+
+        profile_page.open_profile(DENCHIG_ID)
+        collections_fits_in_profile = profile_page.get_collections_count() <= 6
+        assert collections_fits_in_profile != profile_page.check_if_show_collections_button_is_visible()
+
+    def test_objects_in_profile(self, driver):  # 329
+        profile_page = ProfilePage(driver)
+
+        profile_page.open_profile(KTOX_ID)
+        objects_fits_in_profile = profile_page.get_objects_count() <= 24
+        assert objects_fits_in_profile != profile_page.check_if_show_objects_button_is_visible()
+
+        profile_page.open_profile(DENCHIG_ID)
+        objects_fits_in_profile = profile_page.get_objects_count() <= 24
+        assert objects_fits_in_profile != profile_page.check_if_show_objects_button_is_visible()
+
+    def test_collections_in_personal(self, driver):  # 336 и 334
         auth_page = AuthPage(driver)
         profile_page = ProfilePage(driver)
         auth_page.sign_in_ktox()
-        for i in range(10000):
-            profile_page.open_profile(i)
-            try:
-                profile_page.subscribe()
-            except TimeoutException:
-                print(i)
+        profile_page.open_my_profile()
+        profile_page.switch_to_personal()
 
+        collections_fits_in_profile = profile_page.get_collections_count() <= 6
+        assert collections_fits_in_profile != profile_page.check_if_show_collections_button_is_visible()
 
-
-
+        objects_fits_in_profile = profile_page.get_objects_count() <= 24
+        assert objects_fits_in_profile != profile_page.check_if_show_objects_button_is_visible()

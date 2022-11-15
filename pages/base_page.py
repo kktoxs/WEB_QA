@@ -29,7 +29,17 @@ class BasePage:
         return Wait(self.driver, timeout).until(EC.visibility_of_all_elements_located(locator))
 
     def scroll_down(self):
-        self.driver.execute_script("window.scrollTo(0, 1000)")
+        self.element(
+            Locators.LANGUAGE_RU).click()
+        # приходится тыкать на кнопку рус чтобы прокрутить страницу вниз, скрипт скролла не работает
+
+    def check_if_scrolled_down(self):
+        if self.elements(Locators.LANGUAGE_BUTTONS)[0].is_displayed():
+            print('visible')
+            return True
+        else:
+            print('invisible')
+            return False
 
     def switch_lang_to_en(self):
         self.element(Locators.LANGUAGE_ENG).click()
@@ -39,3 +49,7 @@ class BasePage:
 
     def close_tab(self):
         self.driver.close()
+
+    def paste_in_new_tab(self):
+        self.driver.get('https://google.com')
+        self.element(Locators.GOOGLE_SEARCH).send_keys(Keys.CONTROL + "v\n")

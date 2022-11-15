@@ -66,8 +66,8 @@ class TestAuthPage:
 
     def test_sign_in_with_mail_incorrect(self, driver):  # 308
         auth_page = AuthPage(driver)
-        auth_page.sign_in_with_mail(TEST_PROFILE_MAIL, '123123123')
-        auth_page.check_error_message(self.no_such_user_error, self.no_such_user_error_eng)
+        auth_page.sign_in_with_mail("incorrect@email", TEST_PROFILE_PASSWORD)
+        auth_page.check_error_message(self.incorrect_email, self.incorrect_email_eng)
 
     def test_sign_in_no_such_user(self, driver):  # 383
         auth_page = AuthPage(driver)

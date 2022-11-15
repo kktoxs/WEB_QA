@@ -19,3 +19,11 @@ class ProfilePageLocators:
 
     ITEMS = (By.CSS_SELECTOR, 'a[data-qa="lite-item-card"]')
     COLLECTIONS = (By.CSS_SELECTOR, 'a[data-qa="lite-collection-card"]')
+
+    SHARE_BUTTON = (By.CSS_SELECTOR, 'button[data-qa="share-button"]')
+    CLICK_TO_COPY_BUTTON = (By.CSS_SELECTOR, 'button[data-qa="copy-share-link-button"]')
+
+    SUBSCRIPTION = (By.CSS_SELECTOR, 'a[data-qa="subscription-card"]')
+    SUBSCRIBER = (By.CSS_SELECTOR, 'a[data-qa="subscriber-card"]')
+
+    COLLECTIONS_OBJECTS_COUNT = (By.CLASS_NAME, 'itemsCount')
