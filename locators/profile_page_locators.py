@@ -17,8 +17,11 @@ class ProfilePageLocators:
 
     SUBSCRIBERS_SUBSCRIPTIONS = (By.CLASS_NAME, 'fw-medium')
 
-    ITEMS = (By.CSS_SELECTOR, 'a[data-qa="lite-item-card"]')
+    OBJECTS = (By.CSS_SELECTOR, 'a[data-qa="lite-item-card"]')
     COLLECTIONS = (By.CSS_SELECTOR, 'a[data-qa="lite-collection-card"]')
+
+    COLLECTIONS_IN_SHOW_ALL = (By.CSS_SELECTOR, 'a[data-qa="collection-card"]')
+    OBJECTS_IN_SHOW_ALL = (By.CSS_SELECTOR, 'a[data-qa="lite-item-card"]')
 
     SHARE_BUTTON = (By.CSS_SELECTOR, 'button[data-qa="share-button"]')
     CLICK_TO_COPY_BUTTON = (By.CSS_SELECTOR, 'button[data-qa="copy-share-link-button"]')

@@ -67,7 +67,7 @@ class ProfilePage(BasePage):
         return self.get_subscribers_count()
 
     def open_last_created_item(self):
-        self.elements(Locators.ITEMS)[0].click()
+        self.elements(Locators.OBJECTS)[0].click()
         time.sleep(1)
 
     def open_last_created_collection(self):
@@ -83,6 +83,7 @@ class ProfilePage(BasePage):
         time.sleep(1)
         for i in range(50):
             self.scroll_down()
+            time.sleep(0.05)
         count = len(self.elements(Locators.SUBSCRIPTION))
         print(f"\n{self.get_login()}: {count} подписок внутри блока подписки")
         return count
@@ -92,6 +93,7 @@ class ProfilePage(BasePage):
         time.sleep(1)
         for i in range(50):
             self.scroll_down()
+            time.sleep(0.05)
         count = len(self.elements(Locators.SUBSCRIBER))
         print(f"\n{self.get_login()}: {count} подписчиков внутри блока подписчики")
         return count
@@ -134,3 +136,17 @@ class ProfilePage(BasePage):
         except IndexError:
             print("Нет сущностей")
             return 0
+
+    def count_collections(self):
+        self.element(Locators.SHOW_COLLECTIONS).click()
+        self.scroll_down()
+        count = len(self.elements(Locators.COLLECTIONS_IN_SHOW_ALL))
+        print(f"\n{self.get_login()}: {count} коллекций в блоке \"Показать все\"")
+        return count
+
+    def count_objects(self):
+        self.element(Locators.SHOW_OBJECTS).click()
+        self.scroll_down()
+        count = len(self.elements(Locators.OBJECTS_IN_SHOW_ALL))
+        print(f"\n{self.get_login()}: {count} сущностей в блоке \"Показать все\"")
+        return count

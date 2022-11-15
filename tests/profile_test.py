@@ -18,10 +18,9 @@ class TestProfilePage:
         # до авторизации
         show_on_map_text = profile_page.get_show_on_map_counter()
         assert show_on_map_text != '0 мест'
-        auth_page.sign_in_ktox()
-        # auth_page.submit()
-        main_page.open_my_profile()
         # после авторизации
+        auth_page.sign_in_ktox()
+        main_page.open_my_profile()
         show_on_map_text_authorized = profile_page.get_show_on_map_counter()
         assert show_on_map_text_authorized != '0 мест'
         assert show_on_map_text == show_on_map_text_authorized
@@ -150,3 +149,17 @@ class TestProfilePage:
 
         objects_fits_in_profile = profile_page.get_objects_count() <= 24
         assert objects_fits_in_profile != profile_page.check_if_show_objects_button_is_visible()
+
+    def test_show_collections_in_profile(self, driver):  # 337
+        profile_page = ProfilePage(driver)
+
+        profile_page.open_profile(DENCHIG_ID)
+        count_in_profile = profile_page.get_collections_count()
+        assert count_in_profile == profile_page.count_collections()
+
+    def test_show_objects_in_profile(self, driver):  # 331
+        profile_page = ProfilePage(driver)
+
+        profile_page.open_profile(DENCHIG_ID)
+        count_in_profile = profile_page.get_objects_count()
+        assert count_in_profile == profile_page.count_objects()
