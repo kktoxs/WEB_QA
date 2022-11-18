@@ -24,10 +24,10 @@ class ObjectPage(BasePage):
 
     def check_like(self):
         before = int(self.get_likes_counter())
-        print(f"\nДо лайка: {before}")
+        print(f"До лайка: {before}")
         self.like()
         after = int(self.get_likes_counter())
-        print(f"\nПосле лайка: {after}")
+        print(f"После лайка: {after}")
         assert before == after - 1
         self.like()  # возвращаю как было
 
@@ -41,7 +41,9 @@ class ObjectPage(BasePage):
         self.element(Locators.SAVES).click()
 
     def get_author(self):
-        return self.element(Locators.AUTHOR_NAME).text
+        author = self.element(Locators.AUTHOR_NAME).text
+        print(f"Автор сущности \"{self.get_name()}\" - {author}")
+        return author
 
     def show_on_map(self):
         self.element(Locators.SHOW_ON_MAP).click()
@@ -51,7 +53,7 @@ class ObjectPage(BasePage):
 
     def share(self):
         self.element(Locators.SHARE_BUTTON).click()
-        time.sleep(1)
+        time.sleep(0.5)
         self.element(Locators.COPY_SHARE_LINK).click()
 
     def open_link_from_clipboard(self, link):
@@ -61,10 +63,16 @@ class ObjectPage(BasePage):
         return self.element(Locators.INFO).text  # data qa
 
     def get_name(self):
-        return self.element(Locators.NAME).text  # data qa
+        name = self.element(Locators.NAME).text
+        print(name)
+        return name
 
     def get_category(self):
         return self.elements(Locators.TYPE_AND_CATEGORY)[1].text
 
     def get_type(self):
         return self.elements(Locators.TYPE_AND_CATEGORY)[0].text
+
+    def open_author(self):
+        print(f"Открывается профиль автора сущности \"{self.get_name()}\"")
+        self.element(Locators.AUTHOR).click()

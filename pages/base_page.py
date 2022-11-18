@@ -23,10 +23,13 @@ class BasePage:
         try:
             return Wait(self.driver, timeout).until(EC.visibility_of_element_located(locator))
         except TimeoutException:
-            print(f"\nЭлемент {locator} не найден")
+            print(f"Элемент {locator} не найден")
 
     def elements(self, locator, timeout=5):
-        return Wait(self.driver, timeout).until(EC.visibility_of_all_elements_located(locator))
+        try:
+            return Wait(self.driver, timeout).until(EC.visibility_of_all_elements_located(locator))
+        except TimeoutException:
+            print(f"Элементы {locator} не найден")
 
     def scroll_down(self):
         self.element(
