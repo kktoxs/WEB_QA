@@ -1,3 +1,4 @@
+import random
 import time
 
 from selenium.common import TimeoutException
@@ -38,6 +39,7 @@ class ProfilePage(BasePage):
         if self.elements(Locators.SUBSCRIBE_TEXT)[1].text == "Подписаться":
             print(f"\nПодписываюсь на {self.get_login()}")
             self.element(Locators.SUBSCRIBE).click()
+            time.sleep(0.5)
         else:
             print("Нет кнопки Подписаться|Уже подписан")
 
@@ -45,6 +47,7 @@ class ProfilePage(BasePage):
         if self.elements(Locators.SUBSCRIBE_TEXT)[1].text == "Отписаться":
             print(f"\nОтписываюсь от {self.get_login()}")
             self.element(Locators.SUBSCRIBE).click()
+            time.sleep(0.5)
         else:
             print("Нет кнопки Отписаться|Уже отписан")
 
@@ -150,3 +153,27 @@ class ProfilePage(BasePage):
         count = len(self.elements(Locators.OBJECTS_IN_SHOW_ALL))
         print(f"\n{self.get_login()}: {count} сущностей в блоке \"Показать все\"")
         return count
+
+    def check_if_subscribe_button_available(self):
+        subscribe = self.element(Locators.SUBSCRIBE)
+        if subscribe is not None:
+            if subscribe.text == "Подписаться":
+                return True
+            else:
+                return False
+        else:
+            return False
+
+    def open_random_profile_unsubscribed(self):
+        random_id = random.randint(1, 25000)
+        continue_searching = True
+        while continue_searching:
+            self.open_profile(random_id)
+            continue_searching = not self.check_if_subscribe_button_available()
+            random_id = random.randint(1, 25000)
+
+    def open_random_profile_subscribed(self):
+        self.open_my_profile()
+        self.open_subscriptions()
+        count = self.count_subscriptions()
+        self.elements(Locators.SUBSCRIPTION)[random.randint(0, count - 1)].click()

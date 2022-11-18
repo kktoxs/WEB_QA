@@ -19,13 +19,13 @@ class BasePage:
     def open_my_profile(self):
         self.element(Locators.MY_PROFILE).click()
 
-    def element(self, locator, timeout=2):
+    def element(self, locator, timeout=5):
         try:
             return Wait(self.driver, timeout).until(EC.visibility_of_element_located(locator))
         except TimeoutException:
             print(f"\nЭлемент {locator} не найден")
 
-    def elements(self, locator, timeout=2):
+    def elements(self, locator, timeout=5):
         return Wait(self.driver, timeout).until(EC.visibility_of_all_elements_located(locator))
 
     def scroll_down(self):
@@ -53,3 +53,6 @@ class BasePage:
     def paste_in_new_tab(self):
         self.driver.get('https://google.com')
         self.element(Locators.GOOGLE_SEARCH).send_keys(Keys.CONTROL + "v\n")
+
+    def refresh(self):
+        self.driver.refresh()
