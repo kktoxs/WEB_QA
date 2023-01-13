@@ -18,9 +18,8 @@ class AuthPage(BasePage):
         time.sleep(1)
 
     def center_sign_in_button_click(self):
-        time.sleep(5)
-        self.element(Locators.CENTER_SING_IN_BUTTON).click()
-        self.element(Locators.CENTER_SING_IN_BUTTON).click()
+        self.element(Locators.AGREE_BUTTON).click()  # скрыть плашку куки
+        self.element(Locators.CENTER_SIGN_IN_BUTTON).click()
         time.sleep(1)
 
     def sign_in_with_mail(self, email, password):

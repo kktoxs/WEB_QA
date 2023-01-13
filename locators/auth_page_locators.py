@@ -3,7 +3,9 @@ from selenium.webdriver.common.by import By
 
 class AuthPageLocators:
     TOP_CORNER_SIGN_IN_BUTTON = (By.CSS_SELECTOR, 'button[data-qa="navbar-log-out-button"]')
-    CENTER_SING_IN_BUTTON = (By.CSS_SELECTOR, 'div[data-qa="auth-button"]')
+    CENTER_SIGN_IN_BUTTON = (By.CSS_SELECTOR, 'div[data-qa="auth-button"]')
+
+    AGREE_BUTTON = (By.CLASS_NAME, 'toast-button')
 
     SIGN_BUTTONS = (By.CSS_SELECTOR, 'button[data-qa="auth-button"]')
 
