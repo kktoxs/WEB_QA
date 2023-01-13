@@ -1,3 +1,4 @@
+import allure
 from selenium.common import NoSuchElementException, TimeoutException
 from selenium.webdriver import Keys
 from selenium.webdriver.support.ui import WebDriverWait as Wait
@@ -16,13 +17,20 @@ class BasePage:
     def open_url(self, url):
         self.driver.get(url)
 
+    def is_logged_in(self):  # Проверяет видимость кнопки создания (она есть только у авторизованных)
+        try:
+            Wait(self.driver, 3).until(EC.visibility_of_element_located(Locators.ADD_ITEM))
+        except TimeoutException:
+            return False
+        return True
+
     def open_my_profile(self):
         self.element(Locators.MY_PROFILE).click()
 
     def element(self, locator, timeout=5):
         try:
             return Wait(self.driver, timeout).until(EC.visibility_of_element_located(locator))
-        except TimeoutException:
+        except TimeoutException:  # добавить скриншоты
             print(f"Элемент {locator} не найден")
 
     def elements(self, locator, timeout=5):
@@ -45,10 +53,10 @@ class BasePage:
             return False
 
     def switch_lang_to_en(self):
-        self.element(Locators.LANGUAGE_ENG).click()
+        self.elements(Locators.LANGUAGE_RU)[1].click()  #  пока не поправили data qa
 
     def switch_lang_to_ru(self):
-        self.element(Locators.LANGUAGE_RU).click()
+        self.elements(Locators.LANGUAGE_RU)[0].click()
 
     def close_tab(self):
         self.driver.close()
@@ -59,3 +67,5 @@ class BasePage:
 
     def refresh(self):
         self.driver.refresh()
+
+

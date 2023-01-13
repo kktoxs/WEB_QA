@@ -15,6 +15,7 @@ def driver():
     driver.quit()
 
 
+TEST_PROFILE_PHONE = '71231231237'
 TEST_PROFILE_MAIL = 'qct38003@xcoxc.com'
 TEST_PROFILE_LOGIN = "ktox_ui"
 TEST_PROFILE_PASSWORD = "123123123"

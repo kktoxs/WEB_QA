@@ -55,6 +55,7 @@ class AuthPage(BasePage):
     def sign_in_with_phone(self, phone):
         self.element(Locators.TOP_CORNER_SIGN_IN_BUTTON).click()
         self.elements(Locators.SIGN_BUTTONS)[1].click()
+        self.element(Locators.PHONE_NUMBER_INPUT).click()
         self.element(Locators.PHONE_NUMBER_INPUT).send_keys(phone)
         time.sleep(1)
         self.element(Locators.CONTINUE_BUTTON).click()
@@ -64,8 +65,8 @@ class AuthPage(BasePage):
         time.sleep(1)
         self.elements(Locators.SIGN_BUTTONS)[0].click()
         time.sleep(1)
-        self.element(
-            Locators.PHONE_NUMBER_INPUT).click()  # какая то хрень с фокусом в поле телефона, нужно сперва кликуть
+        self.element(Locators.PHONE_NUMBER_INPUT).click()  # какая-то хрень с фокусом в поле телефона, нужно сперва кликуть
+
         self.element(Locators.PHONE_NUMBER_INPUT).send_keys(phone)
         time.sleep(1)
         self.element(Locators.CONTINUE_BUTTON).click()
@@ -74,14 +75,21 @@ class AuthPage(BasePage):
         return self.element(Locators.ERROR_MESSAGE).text
 
     def send_random_code(self):
-        random_code = random.randint(1000, 9999)
+        random_code = random.randint(1000, 6665)  # чтобы не попасть в 6666
         self.element(Locators.PHONE_CODE_INPUT).send_keys(random_code)
+        time.sleep(2)
+        self.submit()
+        time.sleep(1)
+
+    def send_code_6666(self):
+        self.element(Locators.PHONE_CODE_INPUT).send_keys('6666')
         time.sleep(2)
         self.submit()
         time.sleep(1)
 
     def submit(self):
         self.element(Locators.CONTINUE_BUTTON).click()
+        time.sleep(1)
 
     def check_error_message_ru(self, error_ru):
         self.switch_lang_to_ru()

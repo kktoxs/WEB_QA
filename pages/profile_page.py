@@ -63,6 +63,7 @@ class ProfilePage(BasePage):
 
     def get_my_subscriptions_count(self):
         self.open_my_profile()
+        time.sleep(1)
         return self.get_subscriptions_count()
 
     def get_my_subscribers_count(self):
@@ -178,12 +179,14 @@ class ProfilePage(BasePage):
             self.open_profile(random_id)
             continue_searching = not self.check_if_subscribe_button_available()
             random_id = random.randint(1, 25000)
+        time.sleep(1)
 
     def open_random_profile_subscribed(self):
         self.open_my_profile()
         self.open_subscriptions()
         count = self.count_subscriptions()
         self.elements(Locators.SUBSCRIPTION)[random.randint(0, count - 1)].click()
+        time.sleep(1)
 
     def show_all_objects(self):
         self.element(Locators.SHOW_OBJECTS).click()

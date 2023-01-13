@@ -1,6 +1,8 @@
 import time
+import random
+import allure
 
-from conftest import BASE_URL, TEST_PROFILE_LOGIN, TEST_PROFILE_MAIL, TEST_PROFILE_PASSWORD
+from conftest import BASE_URL, TEST_PROFILE_LOGIN, TEST_PROFILE_MAIL, TEST_PROFILE_PASSWORD, TEST_PROFILE_PHONE
 from pages.auth_page import AuthPage
 from pages.profile_page import ProfilePage
 
@@ -40,6 +42,11 @@ class TestAuthPage:
     existing_phone = 'Аккаунт с таким номером телефона уже существует'
     existing_phone_eng = 'An account with the same phone number already exists'
 
+    @allure.feature('Авторизация')
+    @allure.story('Вход по логину')
+    @allure.severity(allure.severity_level.CRITICAL)
+    @allure.title('Успешный вход')
+    @allure.link('https://kiwi.pfm.team/case/304/')
     def test_sign_in_login(self, driver):  # 304
         profile_page = ProfilePage(driver)
         auth_page = AuthPage(driver)
@@ -47,6 +54,11 @@ class TestAuthPage:
         auth_page.open_my_profile()
         assert profile_page.get_login() == TEST_PROFILE_LOGIN, 'Неправильный логин в профиле'
 
+    @allure.feature('Авторизация')
+    @allure.story('Вход по почте')
+    @allure.severity(allure.severity_level.CRITICAL)
+    @allure.title('Успешный вход')
+    @allure.link('https://kiwi.pfm.team/case/305/')
     def test_sign_in_mail(self, driver):  # 305
         profile_page = ProfilePage(driver)
         auth_page = AuthPage(driver)
@@ -54,66 +66,67 @@ class TestAuthPage:
         auth_page.open_my_profile()
         assert profile_page.get_login() == TEST_PROFILE_LOGIN, 'Неправильный логин в профиле'
 
+    @allure.feature('Авторизация')
+    @allure.story('Вход по логину')
+    @allure.severity(allure.severity_level.MINOR)
+    @allure.title('Неправильный пароль')
+    @allure.link('https://kiwi.pfm.team/case/307/')
     def test_sign_in_with_login_wrong_password(self, driver):  # 307
         auth_page = AuthPage(driver)
         auth_page.sign_in_with_mail(TEST_PROFILE_LOGIN, 'wrongpasswd')
         auth_page.check_error_message(self.wrong_password_error, self.wrong_password_error_eng)
 
+    @allure.feature('Авторизация')
+    @allure.story('Вход по почте')
+    @allure.severity(allure.severity_level.MINOR)
+    @allure.title('Неправильный пароль')
+    @allure.link('https://kiwi.pfm.team/case/307/')
     def test_sign_in_with_mail_wrong_password(self, driver):  # 307.2
         auth_page = AuthPage(driver)
         auth_page.sign_in_with_mail(TEST_PROFILE_MAIL, 'wrongpasswd')
         auth_page.check_error_message(self.wrong_password_error, self.wrong_password_error_eng)
 
+    @allure.feature('Авторизация')
+    @allure.story('Вход по почте')
+    @allure.severity(allure.severity_level.MINOR)
+    @allure.title('Некорректная почта')
+    @allure.link('https://kiwi.pfm.team/case/308/')
     def test_sign_in_with_mail_incorrect(self, driver):  # 308
         auth_page = AuthPage(driver)
         auth_page.sign_in_with_mail("incorrect@email", TEST_PROFILE_PASSWORD)
         auth_page.check_error_message(self.incorrect_email, self.incorrect_email_eng)
 
+    @allure.feature('Авторизация')
+    @allure.story('Вход по логину')
+    @allure.severity(allure.severity_level.MINOR)
+    @allure.title('Неправильный логин')
+    @allure.link('https://kiwi.pfm.team/case/383/')
     def test_sign_in_no_such_user(self, driver):  # 383
         auth_page = AuthPage(driver)
         auth_page.sign_in_with_mail('nosuchuser', 'anypasswd')
         auth_page.check_error_message(self.no_such_user_error, self.no_such_user_error_eng)
 
-    def test_reset_password_incorrect_mail(self, driver):  # 311
+    @allure.feature('Авторизация')
+    @allure.story('Вход по телефону')
+    @allure.severity(allure.severity_level.CRITICAL)
+    @allure.title('Успешный вход')
+    @allure.link('https://kiwi.pfm.team/case/388/')
+    def test_sign_in_with_phone(self, driver):  # 388
         auth_page = AuthPage(driver)
-        auth_page.sign_in_with_mail('incorrect@email', 'password')
-        auth_page.reset_password_with_mail('incorrect_mail')
-        auth_page.check_error_message(self.incorrect_email, self.incorrect_email_eng)
+        profile_page = ProfilePage(driver)
+        auth_page.sign_in_with_phone(TEST_PROFILE_PHONE)
+        auth_page.send_code_6666()
+        auth_page.open_my_profile()
+        assert profile_page.get_login() == 'o5smwc_oqmycew7l', 'Неправильный логин в профиле'  # пока не могу привязать номер к тестовому аккаунту
 
-    def test_reset_password_unregistered_mail(self, driver):  # 312
+    @allure.feature('Авторизация')
+    @allure.story('Вход по телефону')
+    @allure.severity(allure.severity_level.MINOR)
+    @allure.title('Неправильный код')
+    @allure.link('https://kiwi.pfm.team/case/389/')
+    def test_sign_in_with_phone_wrong_code(self, driver):  # 389
         auth_page = AuthPage(driver)
-        auth_page.sign_in_with_mail('unregistered@mail.ru', 'password')
-        auth_page.reset_password_with_mail('somefakemail@mail.ru')
-        auth_page.check_error_message(self.unregistered_email, self.unregistered_email_eng)
-
-    def test_register_password_mismatch(self, driver):  # 315
-        auth_page = AuthPage(driver)
-        auth_page.sign_up_with_mail('notexistingmail@inbox.ru', '123123123', '12312312')
-        auth_page.check_error_message(self.password_mismatch, self.password_mismatch_eng)
-
-    def test_register_incorrect_mail(self, driver):  # 316
-        auth_page = AuthPage(driver)
-        auth_page.sign_up_with_mail('ktoxsyrovv@inboxru', '123123123', '123123123')
-        auth_page.check_error_message(self.incorrect_email, self.incorrect_email_eng)
-
-    def test_register_with_existing_mail(self, driver):  # 317
-        auth_page = AuthPage(driver)
-        auth_page.sign_up_with_mail('ktoxsyrovv@inbox.ru', '123123123', '123123123')
-        auth_page.check_error_message(self.existing_mail, self.existing_mail_eng)
-
-    def test_sign_up_with_existing_phone(self, driver):  # 384
-        auth_page = AuthPage(driver)
-        auth_page.sign_up_with_phone('9689061489')
-        auth_page.check_error_message(self.existing_phone, self.existing_phone_eng)
-
-    def test_sign_up_password_not_match_requirement(self, driver):  # 318
-        auth_page = AuthPage(driver)
-        auth_page.sign_up_with_mail('newnew@inbox.ru', '123', '123')
-        auth_page.check_error_message(self.password_not_match_requirements, self.password_not_match_requirements_eng)
-
-    def test_sign_up_with_phone_incorrect_code(self, driver):  # 320
-        auth_page = AuthPage(driver)
-        auth_page.sign_up_with_phone('9689061499')
+        auth_page.sign_in_with_phone(TEST_PROFILE_PHONE)
         auth_page.send_random_code()
         # ошибка (2 попытки)
         auth_page.check_error_message(self.incorrect_code_2, self.incorrect_code_2_eng)
@@ -126,6 +139,115 @@ class TestAuthPage:
         # ошибка (код аннулирован)
         auth_page.check_error_message(self.code_cancelled, self.code_cancelled_eng)
 
+    @allure.feature('Регистрация')
+    @allure.story('Регистрация по телефону')
+    @allure.severity(allure.severity_level.CRITICAL)
+    @allure.title('Успешная регистрация')
+    @allure.link('https://kiwi.pfm.team/case/313/')
+    def test_sign_up_with_phone(self, driver):  # 313
+        auth_page = AuthPage(driver)
+        random_phone = random.randint(10000000000, 99999999999)
+        auth_page.sign_up_with_phone(random_phone)
+        auth_page.send_code_6666()
+        assert auth_page.is_logged_in(), 'Пользователь не авторизован'
+
+    @allure.feature('Восстановление пароля')
+    @allure.story('Восстановление пароля по почте')
+    @allure.severity(allure.severity_level.MINOR)
+    @allure.title('Некорректная почта')
+    @allure.link('https://kiwi.pfm.team/case/311/')
+    def test_reset_password_incorrect_mail(self, driver):  # 311
+        auth_page = AuthPage(driver)
+        auth_page.sign_in_with_mail('incorrect@email', 'password')
+        auth_page.reset_password_with_mail('incorrect_mail')
+        auth_page.check_error_message(self.incorrect_email, self.incorrect_email_eng)
+
+    @allure.feature('Восстановление пароля')
+    @allure.story('Восстановление пароля по почте')
+    @allure.severity(allure.severity_level.MINOR)
+    @allure.title('Незарегистрированная почта')
+    @allure.link('https://kiwi.pfm.team/case/312/')
+    def test_reset_password_unregistered_mail(self, driver):  # 312
+        auth_page = AuthPage(driver)
+        auth_page.sign_in_with_mail('unregistered@mail.ru', 'password')
+        auth_page.reset_password_with_mail('somefakemail@mail.ru')
+        auth_page.check_error_message(self.unregistered_email, self.unregistered_email_eng)
+
+    @allure.feature('Регистрация')
+    @allure.story('Регистрация по почте')
+    @allure.severity(allure.severity_level.MINOR)
+    @allure.title('Несовпадающие пароли')
+    @allure.link('https://kiwi.pfm.team/case/315/')
+    def test_register_password_mismatch(self, driver):  # 315
+        auth_page = AuthPage(driver)
+        auth_page.sign_up_with_mail('notexistingmail@inbox.ru', '123123123', '12312312')
+        auth_page.check_error_message(self.password_mismatch, self.password_mismatch_eng)
+
+    @allure.feature('Регистрация')
+    @allure.story('Регистрация по почте')
+    @allure.severity(allure.severity_level.MINOR)
+    @allure.title('Некорректная почта')
+    @allure.link('https://kiwi.pfm.team/case/316/')
+    def test_register_incorrect_mail(self, driver):  # 316
+        auth_page = AuthPage(driver)
+        auth_page.sign_up_with_mail('ktoxsyrovv@inboxru', '123123123', '123123123')
+        auth_page.check_error_message(self.incorrect_email, self.incorrect_email_eng)
+
+    @allure.feature('Регистрация')
+    @allure.story('Регистрация по почте')
+    @allure.severity(allure.severity_level.MINOR)
+    @allure.title('Занятая почта')
+    @allure.link('https://kiwi.pfm.team/case/317/')
+    def test_register_with_existing_mail(self, driver):  # 317
+        auth_page = AuthPage(driver)
+        auth_page.sign_up_with_mail('ktoxsyrovv@inbox.ru', '123123123', '123123123')
+        auth_page.check_error_message(self.existing_mail, self.existing_mail_eng)
+
+    @allure.feature('Регистрация')
+    @allure.story('Регистрация по телефону')
+    @allure.severity(allure.severity_level.MINOR)
+    @allure.title('Занятый телефон')
+    @allure.link('https://kiwi.pfm.team/case/384/')
+    def test_sign_up_with_existing_phone(self, driver):  # 384
+        auth_page = AuthPage(driver)
+        auth_page.sign_up_with_phone('9689061489')
+        auth_page.check_error_message(self.existing_phone, self.existing_phone_eng)
+
+    @allure.feature('Регистрация')
+    @allure.story('Регистрация по почте')
+    @allure.severity(allure.severity_level.MINOR)
+    @allure.title('Несовпадающие пароли')
+    @allure.link('https://kiwi.pfm.team/case/318/')
+    def test_sign_up_password_not_match_requirement(self, driver):  # 318
+        auth_page = AuthPage(driver)
+        auth_page.sign_up_with_mail('newnew@inbox.ru', '123', '123')
+        auth_page.check_error_message(self.password_not_match_requirements, self.password_not_match_requirements_eng)
+
+    @allure.feature('Регистрация')
+    @allure.story('Регистрация по телефону')
+    @allure.severity(allure.severity_level.MINOR)
+    @allure.title('Неправильный код')
+    @allure.link('https://kiwi.pfm.team/case/320/')
+    def test_sign_up_with_phone_incorrect_code(self, driver):  # 320
+        auth_page = AuthPage(driver)
+        auth_page.sign_up_with_phone('79689061499')
+        auth_page.send_random_code()
+        # ошибка (2 попытки)
+        auth_page.check_error_message(self.incorrect_code_2, self.incorrect_code_2_eng)
+        # еще один клик
+        auth_page.submit()
+        # ошибка (1 попытка)
+        auth_page.check_error_message(self.incorrect_code_1, self.incorrect_code_1_eng)
+        # еще один клик
+        auth_page.submit()
+        # ошибка (код аннулирован)
+        auth_page.check_error_message(self.code_cancelled, self.code_cancelled_eng)
+
+    @allure.feature('Регистрация')
+    @allure.story('Регистрация по почте')
+    @allure.severity(allure.severity_level.MINOR)
+    @allure.title('Неправильный код')
+    @allure.link('https://kiwi.pfm.team/case/319/')
     def test_sign_up_with_mail_incorrect_code(self, driver):  # 319
         auth_page = AuthPage(driver)
         auth_page.sign_up_with_mail('notexistingmail@mail.ru', '123123123', '123123123')
@@ -141,17 +263,30 @@ class TestAuthPage:
         # ошибка (код аннулирован)
         auth_page.check_error_message(self.code_cancelled, self.code_cancelled_eng)
 
+    @allure.feature('Переход на страницу авторизации')
+    @allure.severity(allure.severity_level.CRITICAL)
+    @allure.title('Кнопка в правом верхнем углу')
+    @allure.link('https://kiwi.pfm.team/case/323/')
     def test_corner_auth_button(self, driver):  # 323
         auth_page = AuthPage(driver)
         auth_page.top_corner_sign_in_button_click()
         assert driver.current_url == BASE_URL + '/auth', 'не открывается страница входа при клике на кнопку в углу'
 
+    @allure.feature('Переход на страницу авторизации')
+    @allure.severity(allure.severity_level.CRITICAL)
+    @allure.title('Кнопка в центре')
+    @allure.link('https://kiwi.pfm.team/case/324/')
     def test_center_auth_button(self, driver):  # 324
         auth_page = AuthPage(driver)
         auth_page.center_sign_in_button_click()
         assert driver.current_url == BASE_URL + '/auth', 'не открывается страница входа при клике на кнопку в центре'
 
-    def test_reset_password_with_incorrect_mail(self, driver):
+    @allure.feature('Восстановление пароля')
+    @allure.story('Восстановление пароля по почте')
+    @allure.severity(allure.severity_level.MINOR)
+    @allure.title('Некорректная почта')
+    @allure.link('https://kiwi.pfm.team/case/311/')
+    def test_reset_password_with_incorrect_mail(self, driver):  # 311
         auth_page = AuthPage(driver)
         auth_page.sign_in_with_mail('email', 'password')
         auth_page.reset_password_with_mail('incorrect_mail')

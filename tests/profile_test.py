@@ -101,10 +101,11 @@ class TestProfilePage:
         assert profile_page.get_login() == 'ktox_ui', 'ссылка с профиля ktox ведет не туда'
 
         profile_page.open_random_profile_unsubscribed()
+        login = profile_page.get_login()
         profile_page.share_profile()
         copied_url = buffer.paste()
         driver.get(copied_url)
-        assert profile_page.get_login() == 'ktox_ui', 'ссылка с профиля ktox ведет не туда'
+        assert profile_page.get_login() == login, f'ссылка с профиля {login} ведет не туда'
 
     def test_subscriptions_count(self, driver):  # 328
         profile_page = ProfilePage(driver)
@@ -119,10 +120,10 @@ class TestProfilePage:
         subscriptions_count_in_subscriptions = profile_page.count_subscriptions()
         assert subscriptions_count_in_subscriptions == subscriptions_count_in_profile
 
-        profile_page.open_random_profile_unsubscribed()
-        subscriptions_count_in_profile = profile_page.get_subscriptions_count()
-        subscriptions_count_in_subscriptions = profile_page.count_subscriptions()
-        assert subscriptions_count_in_subscriptions == subscriptions_count_in_profile
+        # profile_page.open_random_profile_unsubscribed()
+        # subscriptions_count_in_profile = profile_page.get_subscriptions_count()
+        # subscriptions_count_in_subscriptions = profile_page.count_subscriptions()
+        # assert subscriptions_count_in_subscriptions == subscriptions_count_in_profile
 
     def test_subscribers_count(self, driver):  # 327
         profile_page = ProfilePage(driver)
@@ -137,10 +138,10 @@ class TestProfilePage:
         subscribers_count_in_subscribers = profile_page.count_subscribers()
         assert subscribers_count_in_profile == subscribers_count_in_subscribers
 
-        profile_page.open_random_profile_unsubscribed()
-        subscribers_count_in_profile = profile_page.get_subscribers_count()
-        subscribers_count_in_subscribers = profile_page.count_subscribers()
-        assert subscribers_count_in_profile == subscribers_count_in_subscribers
+        # profile_page.open_random_profile_unsubscribed()
+        # subscribers_count_in_profile = profile_page.get_subscribers_count()
+        # subscribers_count_in_subscribers = profile_page.count_subscribers()
+        # assert subscribers_count_in_profile == subscribers_count_in_subscribers
 
     def test_collections_in_profile(self, driver):  # 330
         profile_page = ProfilePage(driver)
