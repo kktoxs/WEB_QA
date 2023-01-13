@@ -25,9 +25,11 @@ class ProfilePage(BasePage):
 
     def switch_to_personal(self):
         self.elements(Locators.PUBLIC_PRIVATE)[1].click()
+        time.sleep(1)
 
     def switch_to_public(self):
         self.elements(Locators.PUBLIC_PRIVATE)[0].click()
+        time.sleep(1)
 
     def show_on_map(self):
         self.element(Locators.SHOW_ON_MAP).click()

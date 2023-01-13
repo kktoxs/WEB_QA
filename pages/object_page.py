@@ -64,7 +64,7 @@ class ObjectPage(BasePage):
 
     def get_name(self):
         name = self.element(Locators.NAME).text
-        print(name)
+        print(f"\nимя сущности: {name}")
         return name
 
     def get_category(self):

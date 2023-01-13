@@ -9,6 +9,8 @@ class CreationPageLocators:
     ADD_CATEGORY = (By.CLASS_NAME, "selected-categories-btn")
     CATEGORY = (By.CSS_SELECTOR, 'div[data-qa="creation-categories"]')
 
+    CHOOSE_ADDRESS = (By.CLASS_NAME, 'add-address-btn')
+
     SAVE_TO_PUBLIC_BUTTON = (By.CSS_SELECTOR, 'div[data-qa="save-to-public-btn"]')
     SAVE_TO_PRIVATE_BUTTON = (By.CSS_SELECTOR, 'div[data-qa="save-to-private-btn"]')
     SAVE_TO_COLLECTION_BUTTON = (By.CSS_SELECTOR, 'div[data-qa="save-to-collection-btn"]')

@@ -35,4 +35,6 @@ class CollectionPage(BasePage):
         return self.element(Locators.AUTHOR).text
 
     def get_name(self):
-        return self.element(Locators.NAME).text
+        name = self.element(Locators.NAME).text
+        print(f"\nимя коллекции: {name}")
+        return name
