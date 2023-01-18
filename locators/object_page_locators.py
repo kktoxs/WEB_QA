@@ -19,7 +19,6 @@ class ObjectPageLocators:
 
     TYPE = (By.CSS_SELECTOR, 'p[data-qa="type-chip"]')
     CATEGORY = (By.CSS_SELECTOR, 'p[data-qa="category-chip"]')
-    TYPE_AND_CATEGORY = (By.CLASS_NAME, "chip__category")
 
     INFO_BUTTON = (By.CLASS_NAME, 'info-icon-wrap')
     INFO = (By.CLASS_NAME, 'entity-info-date')

@@ -14,7 +14,7 @@ class FeedPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver, self.url)
 
-    def like(self, i):
+    def like(self, i):  # сломалось
         self.elements(Locators.LIKE)[i].click()
 
     def get_like_counter(self, i):
@@ -52,6 +52,16 @@ class FeedPage(BasePage):
                 break
         print("Нет подборок в ленте")
 
+    def get_publication_category(self, text):
+        if 'место' in text:
+            return 'место'
+        elif 'ссылк' in text:
+            return 'ссылка'
+        elif 'заметк' in text:
+            return 'заметка'
+        elif 'подборк' in text:
+            return 'коллекция'
+
     def like_collection_and_check(self):
         categories = self.elements(Locators.ITEM_CATEGORY)
         for i in range(len(categories)):
@@ -65,9 +75,9 @@ class FeedPage(BasePage):
         print("Нет подборок в ленте")
 
     def like_item_and_check(self):
-        categories = self.elements(Locators.ITEM_CATEGORY)
-        for i in range(len(categories)):
-            if categories[i].text != "ПОДБОРКА":
+        feed_items = self.elements(Locators.PUBLISH_TEXT)
+        for i in range(len(feed_items)):
+            if self.get_publication_category(feed_items[i].text) != 'коллекция':
                 before = self.get_like_counter(i)
                 self.like(i)
                 after = self.get_like_counter(i)

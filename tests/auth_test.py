@@ -235,7 +235,7 @@ class TestAuthPage:
     @allure.feature('Регистрация')
     @allure.story('Регистрация по почте')
     @allure.severity(allure.severity_level.MINOR)
-    @allure.title('Несовпадающие пароли')
+    @allure.title('Не соответствующий теробованиям пароль')
     @allure.link('https://kiwi.pfm.team/case/318/')
     def test_sign_up_password_not_match_requirement(self, driver):  # 318
         auth_page = AuthPage(driver)

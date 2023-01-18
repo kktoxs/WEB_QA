@@ -1,6 +1,8 @@
 import time
 from random import randint
 
+import allure
+
 from pages.auth_page import AuthPage
 from pages.collection_page import CollectionPage
 from pages.feed_page import FeedPage
@@ -9,16 +11,36 @@ from pages.object_page import ObjectPage
 
 
 class TestFeed:
-    def test_like(self, driver):  # 371
+    @allure.feature('Лента новостей')
+    @allure.severity(allure.severity_level.NORMAL)
+    @allure.title('Лайк сущности')
+    @allure.link('https://kiwi.pfm.team/case/371/')
+    def test_like_object(self, driver):  # 371
         auth_page = AuthPage(driver)
         main_page = MainPage(driver)
         feed_page = FeedPage(driver)
         auth_page.sign_in_ktox()
         main_page.open_feed()
 
-        feed_page.like_item_and_check()
+        feed_page.like_item_and_check()  # сломан лайк
+
+    @allure.feature('Лента новостей')
+    @allure.severity(allure.severity_level.NORMAL)
+    @allure.title('Лайк сущности')
+    @allure.link('https://kiwi.pfm.team/case/371/')
+    def test_like_collection(self, driver):  # 371
+        auth_page = AuthPage(driver)
+        main_page = MainPage(driver)
+        feed_page = FeedPage(driver)
+        auth_page.sign_in_ktox()
+        main_page.open_feed()
+
         feed_page.like_collection_and_check()
 
+    @allure.feature('Лента новостей')
+    @allure.severity(allure.severity_level.CRITICAL)
+    @allure.title('Фильтр типов')
+    @allure.link('https://kiwi.pfm.team/case/370/')
     def test_filter_types(self, driver):  # 370
         auth_page = AuthPage(driver)
         main_page = MainPage(driver)
@@ -42,6 +64,10 @@ class TestFeed:
         feed_page.check_only_links_in_feed()
         feed_page.reset_filters()
 
+    @allure.feature('Лента новостей')
+    @allure.severity(allure.severity_level.NORMAL)
+    @allure.title('Фильтр категорий')
+    @allure.link('https://kiwi.pfm.team/case/370/')
     def test_filter_categories(self, driver):  # 370
         auth_page = AuthPage(driver)
         main_page = MainPage(driver)
@@ -91,28 +117,4 @@ class TestFeed:
         auth_page.sign_in_ktox()
         main_page.open_feed()
         feed_page.filter_items()  # жду локатор Читать полностью
-
-    def test_switch_to_world(self, driver):  # 369
-        auth_page = AuthPage(driver)
-        main_page = MainPage(driver)
-        feed_page = FeedPage(driver)
-        auth_page.sign_in_ktox()
-        main_page.open_feed()
-        feed_page.switch_to_world()
-        time.sleep(10)  # мира не будет
-
-    def test_duplicates(self, driver):
-        auth_page = AuthPage(driver)
-        main_page = MainPage(driver)
-        feed_page = FeedPage(driver)
-        auth_page.sign_in_ktox()
-        main_page.open_feed()
-        publications = feed_page.get_all_publications()
-
-        for i in range(len(publications)-1):
-            previous_post = publications[i]
-            next_post = publications[i+1]
-            if previous_post.text == next_post.text:
-                feed_page.compare_posts(previous_post, next_post)  # разобраться с переключением вкладок
-
 

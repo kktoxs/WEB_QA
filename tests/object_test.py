@@ -1,4 +1,6 @@
 import time
+
+import allure
 import pyperclip as buffer
 
 from conftest import KTOX_ID, DENCHIG_ID
@@ -36,6 +38,10 @@ class TestObject:
         driver.get(copied_url)
         assert object_page.get_name() == name
 
+    @allure.feature('Сущность')
+    @allure.severity(allure.severity_level.NORMAL)
+    @allure.title('Правильное имя автора сущности')
+    @allure.link('https://kiwi.pfm.team/case/352/')
     def test_author(self, driver):  # 352
         profile_page = ProfilePage(driver)
         object_page = ObjectPage(driver)

@@ -51,7 +51,7 @@ class ObjectPage(BasePage):
     def open_link(self):
         self.element(Locators.OPEN_LINK).click()
 
-    def share(self):
+    def share(self):  # переделать через внутреннее контекстное меню
         self.element(Locators.SHARE_BUTTON).click()
         time.sleep(0.5)
         self.element(Locators.COPY_SHARE_LINK).click()
@@ -68,10 +68,10 @@ class ObjectPage(BasePage):
         return name
 
     def get_category(self):
-        return self.elements(Locators.TYPE_AND_CATEGORY)[1].text
+        return self.element(Locators.CATEGORY).text
 
     def get_type(self):
-        return self.elements(Locators.TYPE_AND_CATEGORY)[0].text
+        return self.element(Locators.TYPE).text
 
     def open_author(self):
         print(f"Открывается профиль автора сущности \"{self.get_name()}\"")

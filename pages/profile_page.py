@@ -104,6 +104,7 @@ class ProfilePage(BasePage):
         for i in range(50):
             self.scroll_down()
             time.sleep(0.05)
+
         try:
             count = len(self.elements(Locators.SUBSCRIBER))
         except TimeoutException:
